@@ -1,15 +1,27 @@
+// src/components/sections/HeroSection.tsx
 "use client";
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { motion } from "framer-motion"; // For animation
+import { motion, useAnimation } from "framer-motion";
 
 interface HeroSectionProps {
   onBookDemo: () => void;
 }
 
 const HeroSection = ({ onBookDemo }: HeroSectionProps) => {
+  const controls = useAnimation();
+  const sliderRef = useRef<Slider>(null);
+  
+  useEffect(() => {
+    controls.start({
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.8, staggerChildren: 0.2 }
+    });
+  }, [controls]);
+  
   const settings = {
     dots: false,
     infinite: true,
@@ -18,155 +30,128 @@ const HeroSection = ({ onBookDemo }: HeroSectionProps) => {
     vertical: true,
     swipeToSlide: true,
     autoplay: true,
-    speed: 300,
-    autoplaySpeed: 2000,
+    speed: 600,
+    autoplaySpeed: 3000,
     arrows: false,
-    cssEase: "linear",
+    cssEase: "cubic-bezier(0.645, 0.045, 0.355, 1)",
   };
 
+  const headingItems = [
+    "Risk Mitigation",
+    "Hyper Automation",
+    "Financial Analysis",
+    "Complex Analysis",
+    "Encoding"
+  ];
+
   return (
-    <section className="hero-bg h-[390px] md:h-screen overflow-hidden relative">
-      {/* Animated Container */}
-      <div className="container max-w-[90rem] relative z-10 mx-auto px-[10px] flex flex-col justify-end h-full">
-        <div className="flex flex-row">
-          <div className="basis-full">
+    <section className="hero-bg min-h-screen flex items-center overflow-hidden relative">
+      <div className="absolute inset-0 z-0 bg-gradient-to-b from-black/60 via-black/40 to-black/80"></div>
+      
+      <div className="container max-w-[90rem] relative z-10 mx-auto px-5">
+        <div className="flex flex-col h-[85vh] justify-center">
+          <motion.div 
+            initial={{ opacity: 0, y: 30 }}
+            animate={controls}
+            className="max-w-4xl"
+          >
             <motion.h1
-              className="[font-size:_clamp(24px,4vw,80px)] mb-[0] font-normal leading-[1.3] text-[#ffffffb3]"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 1, delay: 0.3 }}
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              className="text-4xl md:text-5xl xl:text-7xl font-normal leading-tight text-white mb-2"
             >
               Intelligent Systems
             </motion.h1>
 
-            {/* Animated Slider Section */}
             <motion.div
-              className="[font-size:_clamp(24px,4vw,80px)] [margin-bottom:_clamp(17px,2vw,48px)] font-normal leading-[1.3] text-[#ffffffb3]"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 1, delay: 0.5 }}
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.4 }}
+              className="flex items-center flex-wrap mb-8 text-4xl md:text-5xl xl:text-7xl font-normal leading-tight"
             >
-              <div className="flex items-center flex-wrap flex-row">
-                <div>
-                  <img
-                    src="/image/AI.svg"
-                    className="max-w-full h-[26px] md:h-[40px] xl:h-[61px]"
-                    alt="Intelligent Systems"
-                  />
-                </div>
-                <div>
-                  <span className="px-[15px] leading-[] xl:px-[24px]">For</span>
-                </div>
+              <div className="flex items-center">
+                <img
+                  src="/image/AI.svg"
+                  className="h-12 md:h-14 xl:h-16 mr-4"
+                  alt="AI"
+                />
+                <span className="text-white mr-4">For</span>
+              </div>
 
-                <div className="max-w-[220px] relative z-0 md:max-w-[400px] xl:max-w-[700px]">
-                  <Slider {...settings}>
-                    <div>
-                      <span className="text-[#1c77cb] leading-[]">Hyper Automation.</span>
+              <div className="relative h-[60px] md:h-[70px] xl:h-[80px] overflow-hidden flex items-center">
+                <Slider ref={sliderRef} {...settings} className="w-full">
+                  {headingItems.map((item, index) => (
+                    <div key={index} className="!flex items-center">
+                      <span className="text-[#1c77cb] font-medium">{item}</span>
                     </div>
-                    <div>
-                      <span className="text-[#1c77cb] leading-[]">Risk Mitigation</span>
-                    </div>
-                    <div>
-                      <span className="text-[#1c77cb] leading-[]">Encoding</span>
-                    </div>
-                    <div>
-                      <span className="text-[#1c77cb] leading-[]">Financial Analysis</span>
-                    </div>
-                    <div>
-                      <span className="text-[#1c77cb]">Complex Analysis</span>
-                    </div>
-                  </Slider>
-                </div>
+                  ))}
+                </Slider>
               </div>
             </motion.div>
 
-            {/* Description and Call to Action Button */}
-            <div className="flex flex-wrap flex-col md:flex-row md:items-center">
-              <div>
-                <motion.p
-                  className="max-w-[581px] mb-[18px] xl:mb-[0px] text-[#C3C3C5] [font-size:_clamp(8.5px,3vw,22px)] Helvetica-400 font-normal leading-[1.3]"
+            <motion.p
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.6 }}
+              className="text-lg md:text-xl text-gray-200 max-w-2xl mb-12"
+            >
+              At DeeCogs Technologies we build AI-Driven solutions that transform challenges into opportunities—step into the future of innovation with us.
+            </motion.p>
+
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.8 }}
+              className="flex flex-wrap items-center gap-6"
+            >
+              <button
+                onClick={onBookDemo}
+                className="bg-[#fe6623] hover:bg-[#fe6623]/90 px-8 py-3 text-lg text-white rounded-full transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
+              >
+                Book a Demo
+              </button>
+              
+              <div className="hidden md:block h-14 w-px bg-white/30 mx-4"></div>
+              
+              <a href="#explore" className="text-white group flex items-center gap-2">
+                <span className="text-lg">Explore Our Solutions</span>
+                <svg 
+                  className="w-5 h-5 transform group-hover:translate-x-1 transition-transform" 
+                  fill="none" 
+                  viewBox="0 0 24 24" 
+                  stroke="currentColor"
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                </svg>
+              </a>
+            </motion.div>
+          </motion.div>
+        </div>
+        
+        <motion.div 
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 1 }}
+          className="absolute bottom-12 left-0 right-0 z-10"
+        >
+          <div className="container max-w-[90rem] mx-auto px-5">
+            <div className="flex flex-wrap justify-between border-t border-white/20 pt-6 gap-4 md:gap-6 overflow-x-auto">
+              {["LLMs", "NLP", "Edge Computing", "Machine Learning", "Computer Vision"].map((tech, index) => (
+                <motion.span
+                  key={tech}
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
-                  transition={{ duration: 1, delay: 0.7 }}
+                  transition={{ duration: 0.4, delay: 1 + index * 0.1 }}
+                  className="text-gray-300 font-light text-base md:text-xl whitespace-nowrap"
                 >
-                  At DeeCogs Technologies we build AI-Driven solutions that transform challenges into opportunities—step into the future of innovation with us.
-                </motion.p>
-              </div>
-              <div className="h-[92px] hidden md:block [margin-left:_clamp(30px,2vw,58px)] [margin-right:_clamp(30px,2vw,58px)] border border-[#ffffff]"></div>
-
-              <div className="flex-shrink-0">
-                <button
-                  className="bg-[#fe6623e3] hover:!bg-[#fe6623e3] [padding-left:_clamp(2px,2vw,20px)] [padding-right:_clamp(2px,2vw,20px)] [padding-top:_clamp(1px,2vw,7px)] [padding-bottom:_clamp(1px,2vw,7px)] [font-size:_clamp(8px,2vw,22px)] border border-[#fe6623] hover:bottom-[#fff] leading-[1] rounded-[32px] inline-block text-[#ffffffe6]"
-                  onClick={onBookDemo}
-                >
-                  Book a Demo
-                </button>
-              </div>
+                  {tech}
+                </motion.span>
+              ))}
             </div>
           </div>
-        </div>
-
-        {/* Animated Footer with new gradient background */}
-        <div className="flex flex-wrap justify-between [margin-top:_clamp(18px,2vw,97px)] border-t border-[#ffffffb3] pb-[13px] lg:pt-[13px] lg:pb-[38px] gap-[5px] lg:gap-[10px]">
-          <div>
-            <motion.span
-              className="text-[#AAAAAD] helvetica-light font-thin [font-size:_clamp(12px,2vw,24px)]"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 1, delay: 1 }}
-            >
-              LLMs
-            </motion.span>
-          </div>
-          <div>
-            <motion.span
-              className="text-[#AAAAAD] helvetica-light font-thin [font-size:_clamp(12px,2vw,24px)]"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 1, delay: 1.1 }}
-            >
-              NLP
-            </motion.span>
-          </div>
-          <div>
-            <motion.span
-              className="text-[#AAAAAD] helvetica-light font-thin [font-size:_clamp(12px,2vw,24px)]"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 1, delay: 1.2 }}
-            >
-              Edge Computing
-            </motion.span>
-          </div>
-          <div>
-            <motion.span
-              className="text-[#AAAAAD] helvetica-light font-thin [font-size:_clamp(12px,2vw,24px)]"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 1, delay: 1.3 }}
-            >
-              Machine Learning
-            </motion.span>
-          </div>
-          <div>
-            <motion.span
-              className="text-[#AAAAAD] helvetica-light font-thin [font-size:_clamp(12px,2vw,24px)]"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 1, delay: 1.4 }}
-            >
-              Computer Vision
-            </motion.span>
-          </div>
-        </div>
+        </motion.div>
       </div>
-
-      {/* Background with subtle motion */}
-      <img
-        src="/image/hero-bg.png"
-        className="w-full opacity-[25%] absolute z-0 left-0 right-0 top-0 bottom-0"
-        alt=""
-      />
     </section>
   );
 };
