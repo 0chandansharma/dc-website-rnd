@@ -71,20 +71,6 @@ const SpecializeSection = ({ onBookDemo }: SpecializeSectionProps) => {
           </div>
         </div>
       </div>
-
-      {/* Optional: Adding a decorative graphic below the section */}
-      <div className="absolute bottom-0 left-0 right-0">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="100%"
-          height="100"
-          viewBox="0 0 100 100"
-          preserveAspectRatio="none"
-          className="fill-current text-[#FE6623]"
-        >
-          <path d="M0,0 C50,100 50,100 100,0 Z" />
-        </svg>
-      </div>
     </section>
   );
 };

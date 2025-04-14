@@ -205,6 +205,10 @@ body {
 .what-our-clients{
   display: none;
 }
+.cardHover {
+  transform: scale(1.05);
+  transition: transform 0.3s ease-in-out;
+}
 
 @keyframes fadeInUp {
   from {
@@ -390,6 +394,7 @@ body {
 @media (width >= 1280px) {
   .mobile-menu.translate-x-full {
     transform: translateX(0px) !important;
+    margin: 24px;
   }
 }
 
@@ -720,66 +725,5 @@ body {
     0% { opacity: 0; transform: translateX(0); }
     50% { opacity: 1; transform: translateX(-10px); }
     100% { opacity: 0; transform: translateX(-20px); }
-  }
-}
-
-/* Square product tiles */
-.solutions-swiper .swiper-slide {
-  height: auto;
-  width: auto;
-  aspect-ratio: 1/1;
-}
-
-.slider-column {
-  aspect-ratio: 1/1;
-  height: 0 !important;
-  padding-bottom: 100%;
-  position: relative;
-}
-
-.slider-column > div:first-child {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-}
-
-/* Responsive adjustments for square tiles */
-@media (max-width: 768px) {
-  .solutions-swiper .swiper-slide {
-    width: 280px !important;
-  }
-}
-
-@media (min-width: 769px) and (max-width: 1023px) {
-  .solutions-swiper .swiper-slide {
-    width: 320px !important;
-  }
-}
-
-@media (min-width: 1024px) {
-  .solutions-swiper .swiper-slide {
-    width: 350px !important;
-  }
-}
-
-/* Adjust text content for square format */
-.slider-column .bg-[#292C334D] {
-  padding: 16px !important;
-}
-
-.slider-column .line-1 {
-  -webkit-line-clamp: 2;
-  line-clamp: 2;
-  max-height: 2.4em;
-  font-size: clamp(11px, 1.5vw, 16px) !important;
-}
-
-@media (max-width: 768px) {
-  .slider-column .line-1 {
-    -webkit-line-clamp: 1;
-    line-clamp: 1;
-    max-height: 1.2em;
   }
 }

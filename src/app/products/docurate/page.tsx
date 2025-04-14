@@ -71,7 +71,7 @@ const DocuratePage = () => {
               
               <motion.div 
                 className="w-full lg:w-1/2"
-                initial={{ opacity: 0, x: 30 }}
+                initial={{ opacity: 0, x: 10 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.8, delay: 0.2 }}
               >
@@ -79,7 +79,7 @@ const DocuratePage = () => {
                   <img 
                     src="/image/products/docurate-hero.png" 
                     alt="Docurate Platform Interface" 
-                    className="w-full rounded-lg shadow-xl"
+                    // className="w-full rounded-lg shadow-xl"
                   />
                 </div>
               </motion.div>
@@ -203,7 +203,7 @@ const DocuratePage = () => {
                   description: "Automatically extract and categorize transaction details from receipts for expense tracking and reimbursement."
                 },
                 {
-                  icon: "/image/products/cibil-icon.png",
+                  icon: "/image/products/bank-statement-icon.png",
                   title: "CIBIL Report Analysis",
                   description: "Parse credit reports to extract credit scores, history, and financial behavior metrics for loan processing."
                 },
@@ -223,7 +223,7 @@ const DocuratePage = () => {
                   description: "Automate invoice processing with data extraction, validation, and integration with accounting systems."
                 },
                 {
-                  icon: "/image/products/bank-icon.png",
+                  icon: "/image/products/bank-statement-icon.png",
                   title: "Bank Statement Analysis",
                   description: "Extract transaction history, balances, and financial patterns from bank statements for financial assessment."
                 }
