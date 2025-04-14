@@ -98,11 +98,11 @@ const Header = () => {
           <Navbar.Brand as={Link} href="/">
             <motion.img
               src="/image/white-logo.png"
-              className="h-10 md:h-14"
+              className="h-12 md:h-16 lg:h-19"
               alt="DeeCogs Logo"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ delay: 0.2, duration: 0.5 }}
+              transition={{ delay: 0.1, duration: 0.5 }}
               whileHover={{ scale: 1.05 }}
             />
           </Navbar.Brand>

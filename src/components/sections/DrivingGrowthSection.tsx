@@ -133,7 +133,7 @@ const DrivingGrowthSection = ({ onBookDemo }: DrivingGrowthSectionProps) => {
                     </div>
                   </div>
                 </div>
-                <div className="text-center md:text-start">
+                {/* <div className="text-center md:text-start">
                   <a
                     className="bg-[#FE6623E3] leading-[1.2] [margin-top:_clamp(21px,2vw,80px)] [padding-left:_clamp(2px,2vw,20px)] [padding-right:_clamp(2px,2vw,20px)] [padding-top:_clamp(1px,2vw,7px)] [padding-bottom:_clamp(1px,2vw,7px)] [font-size:_clamp(8px,2vw,22px)] border border-[#FE6623] rounded-[32px] inline-block text-[#ffffffe6]"
                     href="#"
@@ -141,7 +141,7 @@ const DrivingGrowthSection = ({ onBookDemo }: DrivingGrowthSectionProps) => {
                   >
                     Book a Demo
                   </a>
-                </div>
+                </div> */}
               </div>
               <div className="basis-full hidden md:block mt-[30px] md:mt-0 md:basis-6/12">
                 <div>

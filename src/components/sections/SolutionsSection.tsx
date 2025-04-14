@@ -172,7 +172,7 @@ const SolutionsSection = () => {
   };
 
   return (
-    <section className="delivering-ai-solutions [padding-top:_clamp(54px,4vw,192px)] [padding-bottom:_clamp(54px,4vw,160px)]">
+    <section className="delivering-ai-solutions [padding-top:_clamp(54px,4vw,192px)] [padding-bottom:_clamp(54px,4vw,110px)]">
       <div className="container max-w-[90rem] mx-auto px-[10px]">
         <motion.div
           initial={{ opacity: 0, y: 20 }}

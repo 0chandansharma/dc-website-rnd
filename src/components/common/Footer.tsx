@@ -3,9 +3,10 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 
 const Footer = () => {
+  // Animation variants
   const fadeInUp = {
-    hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.5 } }
+    hidden: { opacity: 0, y: 30 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.7 } }
   };
   
   const staggerChildren = {
@@ -14,14 +15,84 @@ const Footer = () => {
       opacity: 1,
       transition: { 
         staggerChildren: 0.1,
-        delayChildren: 0.2
+        delayChildren: 0.3
       }
     }
   };
 
+  const pulseAnimation = {
+    initial: { scale: 1 },
+    animate: {
+      scale: [1, 1.05, 1],
+      transition: { 
+        duration: 2,
+        repeat: Infinity,
+        repeatType: "reverse"
+      }
+    }
+  };
+
+  // Social media links data
+  const socialLinks = [
+    { href: "https://in.linkedin.com/company/deecogs", icon: "linkedin", ariaLabel: "LinkedIn" },
+    { href: "https://x.com/Deecogs_ai", icon: "twitter", ariaLabel: "Twitter" },
+    { href: "#", icon: "youtube", ariaLabel: "YouTube" },
+    { href: "https://www.instagram.com/deecogs_/#", icon: "instagram", ariaLabel: "Instagram" }
+  ];
+
+  // Footer navigation data
+  const footerNavigation = [
+    {
+      title: "Company",
+      links: [
+        { text: "About Us", href: "#" },
+        { text: "Careers", href: "#" },
+        { text: "Contact Us", href: "#" },
+        { text: "Trust Centre", href: "#" },
+        { text: "Recognitions", href: "#" }
+      ]
+    },
+    {
+      title: "Resources",
+      links: [
+        { text: "Case Studies", href: "#" },
+        { text: "Publications", href: "#" },
+        { text: "Testimonials", href: "#" },
+        { text: "Blogs", href: "#" },
+        { text: "Videos", href: "#" }
+      ]
+    },
+    {
+      title: "Products",
+      links: [
+        { text: "Docurate", href: "#" },
+        { text: "VisionTech", href: "#" },
+        { text: "Fusio", href: "#" },
+        { text: "Rae", href: "#" },
+        { text: "Notei", href: "#" }
+      ]
+    },
+    {
+      title: "Solutions",
+      links: [
+        { text: "Canse", href: "#" },
+        { text: "Therai (Cancer Prognostic Tool)", href: "#" },
+        { text: "Excerli (Workout Platform)", href: "#" }
+      ]
+    }
+  ];
+
   return (
     <footer className="bg-[url('/image/footer.jpg')] [padding-top:_clamp(88px,4vw,255px)] relative bg-cover bg-center bg-no-repeat">
-      <div className="container max-w-[90rem] mx-auto px-[10px] relative z-10">
+      {/* Background gradient overlay */}
+      <motion.div 
+        className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent z-0"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 1.5 }}
+      />
+      
+      <div className="container max-w-[85rem] mx-auto px-[10px] relative z-10">
         <motion.div 
           className="flex flex-wrap flex-row"
           initial="hidden"
@@ -29,6 +100,7 @@ const Footer = () => {
           viewport={{ once: true, margin: "-100px" }}
           variants={staggerChildren}
         >
+          {/* Left Column - Logo and Social Links */}
           <motion.div 
             className="basis-full mb-[20px] lg:basis-5/12"
             variants={fadeInUp}
@@ -37,16 +109,17 @@ const Footer = () => {
               <Link href="/" className="block">
                 <motion.img
                   src="/image/logo-footer.png"
-                  className="[max-width:_clamp(137px,10vw,444px)] mb-[15px] lg:mb-[55px] block"
+                  className="[max-width:_clamp(200px,10vw,544px)] mb-[15px] lg:mb-[25px] block"
                   alt="DeeCogs Logo"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ duration: 0.5 }}
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.2 }}
+                  whileHover={{ filter: "brightness(1.1)" }}
                 />
               </Link>
 
               <motion.p 
-                className="text-[#838383] max-w-[531px] text-[16px] lg:text-[22px]"
+                className="text-[#838383] max-w-[520px] text-[14px] lg:text-[18px]"
                 variants={fadeInUp}
               >
                 We craft AI-driven solutions to transform your challenges into
@@ -57,23 +130,20 @@ const Footer = () => {
                 className="flex flex-wrap mt-[30px] items-center"
                 variants={staggerChildren}
               >
-                {[
-                  { href: "https://in.linkedin.com/company/deecogs", icon: "linkedin" },
-                  { href: "https://x.com/Deecogs_ai", icon: "twitter" },
-                  { href: "#", icon: "youtube" },
-                  { href: "https://www.instagram.com/deecogs_/#", icon: "instagram" }
-                ].map((social, index) => (
+                {socialLinks.map((social, index) => (
                   <motion.div 
                     key={social.icon}
-                    className={`px-[4px] lg:px-[10px] ${index === 0 ? 'ps-0' : ''} ${index === 3 ? 'pe-[0px]' : ''}`}
+                    className={`px-[2px] lg:px-[6px] ${index === 0 ? 'ps-0' : ''} ${index === socialLinks.length-1 ? 'pe-[0px]' : ''}`}
                     variants={fadeInUp}
-                    whileHover={{ scale: 1.1 }}
+                    whileHover={{ scale: 1.15, y: -3 }}
+                    transition={{ type: "spring", stiffness: 400 }}
                   >
                     <Link
                       className="text-[#6D6F7F] hover:text-[#FE6623] transition-colors duration-300"
                       href={social.href}
-                      aria-label={`Follow us on ${social.icon}`}
+                      aria-label={social.ariaLabel}
                     >
+                      {/* SVG icons are preserved from your original code */}
                       {social.icon === "linkedin" && (
                         <svg
                           viewBox="0 0 55 54"
@@ -141,6 +211,7 @@ const Footer = () => {
             </div>
           </motion.div>
           
+          {/* Right Column - Footer Links */}
           <motion.div 
             className="basis-full lg:basis-7/12"
             variants={fadeInUp}
@@ -149,76 +220,53 @@ const Footer = () => {
               className="grid grid-cols-2 lg:grid-cols-4 gap-[10px]"
               variants={staggerChildren}
             >
-              {[
-                {
-                  title: "Company",
-                  links: [
-                    { text: "About Us", href: "#" },
-                    { text: "Careers", href: "#" },
-                    { text: "Contact Us", href: "#" },
-                    { text: "Trust Centre", href: "#" },
-                    { text: "Recognitions", href: "#" }
-                  ]
-                },
-                {
-                  title: "Resources",
-                  links: [
-                    { text: "Case Studies", href: "#" },
-                    { text: "Publications", href: "#" },
-                    { text: "Testimonials", href: "#" },
-                    { text: "Blogs", href: "#" },
-                    { text: "Videos", href: "#" }
-                  ]
-                },
-                {
-                  title: "Products",
-                  links: [
-                    { text: "Docurate", href: "#" },
-                    { text: "VisionTech", href: "#" },
-                    { text: "Fusio", href: "#" },
-                    { text: "Rae", href: "#" },
-                    { text: "Notei", href: "#" }
-                  ]
-                },
-                {
-                  title: "Solutions",
-                  links: [
-                    { text: "Canse (Cancer Risk Predictor)", href: "#" },
-                    { text: "Therai (Cancer Prognostic Tool)", href: "#" },
-                    { text: "Excerli (Workout Platform)", href: "#" }
-                  ]
-                }
-              ].map((column, columnIndex) => (
-                <motion.div key={column.title} variants={fadeInUp}>
-                  <h2 className="[font-size:_clamp(14px,2vw,26px)] font-bold mb-[15px] lg:mb-[46px] text-[#0000009c]">
+              {footerNavigation.map((column) => (
+                <motion.div 
+                  key={column.title} 
+                  variants={fadeInUp}
+                  className="mb-8"
+                >
+                  <h2 className="[font-size:_clamp(12px,2vw,20px)] font-bold mb-[12px] lg:mb-[36px] text-[#0000009c] relative">
                     {column.title}
+                    <motion.span
+                      className="absolute -bottom-2 left-0 h-[2px] bg-[#FE6623]/50"
+                      initial={{ width: 0 }}
+                      whileInView={{ width: "40%" }}
+                      transition={{ duration: 0.8, delay: 0.2 }}
+                    />
                   </h2>
                   <motion.ul 
-                    className="m-0 p-0"
+                    className="m-0 p-0 space-y-3"
                     variants={staggerChildren}
                   >
-                    {column.links.map((link, linkIndex) => (
+                    {column.links.map((link) => (
                       <motion.li 
                         key={link.text} 
-                        className="mb-[10px] lg:mb-[24px]"
+                        className="mb-[10px] lg:mb-[12px] transform"
                         variants={fadeInUp}
-                        whileHover={{ x: 5 }}
+                        whileHover={{ x: 5, color: "#FE6623" }}
+                        transition={{ duration: 0.2 }}
                       >
                         <Link
                           href={link.href}
-                          className="text-[#707070] [font-size:_clamp(10px,2vw,20px)] hover:text-[#FE6623] transition-colors duration-300"
+                          className="text-[#707070] [font-size:_clamp(10px,2vw,16px)] hover:text-[#FE6623] transition-colors duration-300 flex items-center"
                         >
+                          <motion.span 
+                            className="w-0 h-[1px] bg-[#FE6623] mr-0 opacity-0"
+                            whileHover={{ width: 10, marginRight: 8, opacity: 1 }}
+                            transition={{ duration: 0.3 }}
+                          />
                           {link.text.includes("(") ? (
                             <>
                               {link.text.split("(")[0]}{" "}
-                              <span className="text-[14px]">
+                              <span className="text-[10px]">
                                 ({link.text.split("(")[1]}
                               </span>
                             </>
                           ) : (
                             link.text
                           )}
-                          </Link>
+                        </Link>
                       </motion.li>
                     ))}
                   </motion.ul>
@@ -228,6 +276,7 @@ const Footer = () => {
           </motion.div>
         </motion.div>
         
+        {/* Subscribe Section */}
         <motion.div 
           className="flex flex-wrap mt-[30px] lg:mt-[0px] mb-[30px] lg:mb-[58px] flex-row items-end"
           initial={{ opacity: 0, y: 20 }}
@@ -236,28 +285,43 @@ const Footer = () => {
           transition={{ duration: 0.5, delay: 0.5 }}
         >
           <div className="basis-full pe-[15px] lg:basis-6/12">
-            <div className="max-w-[556px]">
-              <span className="text-[#0000008a] font-normal [font-size:_clamp(12px,2vw,32px)]">
+            <motion.div 
+              className="max-w-[556px]"
+              variants={pulseAnimation}
+              initial="initial"
+              animate="animate"
+            >
+              <span className="text-[#0000008a] font-normal [font-size:_clamp(12px,2vw,24px)]">
                 For Latest Insights
               </span>
-              <h3 className="text-[#000000] font-normal leading-[1.3] [font-size:_clamp(16px,2vw,48px)]">
+              <h3 className="text-[#000000] font-normal leading-[1.3] [font-size:_clamp(16px,2vw,26px)]">
                 Subscribe for Updates.
               </h3>
-              <form action="" className="mt-[30px] lg:mt-[50px]">
+              <form className="mt-[20px] lg:mt-[40px]">
                 <div className="w-full group relative">
-                  <input
+                  <motion.input
                     type="email"
-                    name="floating_email"
+                    name="email"
                     id="floating_email"
-                    className="block arrow-bg-input pe-[35px] bg-no-repeat py-2.5 px-0 w-full text-[#000] bg-transparent border-0 border-b-2 border-p[#000000bf] appearance-none focus:outline-none focus:ring-0 placeholder:font-light placeholder:text-[#000000bf] text-[20px] focus:border-[#FE6623E3] peer"
+                    className="block arrow-bg-input pe-[35px] bg-no-repeat py-3 px-0 w-full text-[#000] bg-transparent border-0 border-b-2 border-p[#000000bf] appearance-none focus:outline-none focus:ring-0 placeholder:font-light placeholder:text-[#000000bf] text-[20px] focus:border-[#FE6623E3] peer"
                     placeholder="Enter your email address.."
                     required
+                    whileFocus={{ 
+                      borderColor: "#FE6623", 
+                      transition: { duration: 0.3 } 
+                    }}
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.5, delay: 0.2 }}
                   />
                   <motion.button
                     type="submit"
                     className="absolute right-0 top-1/2 -translate-y-1/2 text-[#FE6623] hover:text-[#FE6623E3] transition-colors"
-                    whileHover={{ scale: 1.1 }}
+                    whileHover={{ scale: 1.1, x: 5 }}
                     whileTap={{ scale: 0.95 }}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: 0.3 }}
                   >
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path d="M2 12L22 12" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
@@ -266,17 +330,23 @@ const Footer = () => {
                   </motion.button>
                 </div>
               </form>
-            </div>
+            </motion.div>
           </div>
         </motion.div>
         
+        {/* Footer Bottom Section */}
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
         >
-          <hr className="border-0 h-[1px] bg-hr-gradient" />
+          <motion.hr 
+            className="border-0 h-[1px] bg-hr-gradient"
+            initial={{ width: 0 }}
+            whileInView={{ width: "100%" }}
+            transition={{ duration: 1 }}
+          />
         </motion.div>
         
         <motion.div 
@@ -286,14 +356,32 @@ const Footer = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.5, delay: 0.2 }}
         >
-          <span className="text-[#292C33] block mb-[32px] text-[14px]">
+          <motion.span 
+            className="text-[#292C33] block mb-[32px] text-[14px]"
+            whileHover={{ color: "#FE6623" }}
+          >
             @2024 DeeCogs
-          </span>
+          </motion.span>
           <ul className="flex justify-center">
-            {["Legal", "Privacy", "Trust"].map((item) => (
-              <motion.li key={item} className="px-[32px]" whileHover={{ y: -2 }}>
-                <Link href="#" className="text-[#292C33] text-[14px] hover:text-[#FE6623] transition-colors">
+            {["Legal", "Privacy", "Trust"].map((item, index) => (
+              <motion.li 
+                key={item} 
+                className="px-[32px]" 
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.2 + index * 0.1 }}
+                whileHover={{ y: -2 }}
+              >
+                <Link 
+                  href="#" 
+                  className="text-[#292C33] text-[14px] hover:text-[#FE6623] transition-colors relative group"
+                >
                   {item}
+                  <motion.span 
+                    className="absolute -bottom-1 left-0 h-[1px] bg-[#FE6623] w-0 group-hover:w-full transition-all duration-300"
+                    initial={{ width: "0%" }}
+                    whileHover={{ width: "100%" }}
+                  />
                 </Link>
               </motion.li>
             ))}
@@ -301,6 +389,7 @@ const Footer = () => {
         </motion.div>
       </div>
       
+      {/* Footer Decoration */}
       <motion.img
         src="/image/footer-shape.png"
         className="absolute max-w-[315px] md:max-w-[1280px] right-0 bottom-0 z-0"
