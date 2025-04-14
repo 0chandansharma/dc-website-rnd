@@ -33,7 +33,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${helvetica.variable}`}>
-      <body className="font-helvetica">
+      <body className="font-helvetica overflow-x-hidden">
         <PageTransition>
           {children}
         </PageTransition>

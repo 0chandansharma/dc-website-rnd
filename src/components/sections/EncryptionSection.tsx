@@ -1,8 +1,14 @@
 import React from "react";
 import { motion } from "framer-motion";
 import AnimatedCard from "@/components/common/AnimatedCard";
+import { useRouter } from 'next/navigation';
+
 
 const EncryptionSection = () => {
+  const router = useRouter();
+  const handleLearnMoreSecurity = () => {
+    router.push('/security');
+  };
   const securityFeatures = [
     {
       icon: (
@@ -97,7 +103,10 @@ const EncryptionSection = () => {
                   icon={feature.icon}
                   delay={index * 0.1}
                   hoverEffect="glow"
-                  className="bg-[#FE66232E] hover:bg-[#FE6623] hover:text-white group transition-all duration-300"
+                  className="bg-[#F5F5F5] border border-gray-200 hover:border-[#FE6623]/30 group transition-all duration-300 
+                    hover:shadow-md hover:bg-white/90 
+                    transform hover:-translate-y-2 
+                    ease-in-out"
                 />
               ))}
             </div>
@@ -110,12 +119,25 @@ const EncryptionSection = () => {
               transition={{ delay: 0.5 }}
             >
               <motion.button
-                className="bg-transparent text-[#FE6623] border border-[#FE6623] hover:bg-[#FE6623] hover:text-white transition-colors duration-300 rounded-full py-3 px-8 inline-flex items-center"
+                className="bg-transparent text-[#FE6623] border border-[#FE6623] 
+                  hover:bg-[#FE6623]/10 hover:text-[#FE6623] 
+                  transition-colors duration-300 
+                  rounded-full py-3 px-8 
+                  inline-flex items-center 
+                  group"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
+                onClick={handleLearnMoreSecurity}
               >
+                
                 <span>Learn More About Our Security</span>
-                <svg className="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <svg 
+                  className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" 
+                  fill="none" 
+                  stroke="currentColor" 
+                  viewBox="0 0 24 24" 
+                  xmlns="http://www.w3.org/2000/svg"
+                >
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
                 </svg>
               </motion.button>
