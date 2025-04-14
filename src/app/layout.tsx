@@ -2,6 +2,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import localFont from 'next/font/local';
+import PageTransition from "@/components/layout/PageTransition";
 
 // Define your custom font
 const helvetica = localFont({
@@ -33,7 +34,9 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${helvetica.variable}`}>
       <body className="font-helvetica">
-        {children}
+        <PageTransition>
+          {children}
+        </PageTransition>
       </body>
     </html>
   );
