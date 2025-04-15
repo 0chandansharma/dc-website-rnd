@@ -46,7 +46,7 @@ const Header = () => {
       name: "Resources", 
       path: "/resources",
       dropdown: [
-        { name: "Blog", path: "/resources/blog" },
+        { name: "Blog", path: "/blog" },
         { name: "Case Studies", path: "/resources/case-studies" },
         { name: "Whitepapers", path: "/resources/whitepapers" }
       ]
