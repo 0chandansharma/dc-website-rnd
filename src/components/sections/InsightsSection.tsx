@@ -173,7 +173,9 @@ const InsightsSection = () => {
                               href={post.link}
                               className="group inline-flex items-center text-white hover:text-[#FE6623] transition-colors"
                             >
-                              <span className="mr-2">Read Article</span>
+                              <Link href="/blog/article-slug" 
+                               className="mr-2">Read Article
+                              </Link>
                               <motion.svg 
                                 className="w-5 h-5" 
                                 initial={{ x: 0 }}
