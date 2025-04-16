@@ -1,7 +1,8 @@
 // src/components/common/ContactModal.tsx
 import React, { useState } from "react";
-import { Button, Modal } from "flowbite-react";
+import { Modal } from "flowbite-react";
 import { motion, AnimatePresence } from "framer-motion";
+import Button from "@/components/common/Button";
 
 interface ContactModalProps {
   openModal: boolean;
@@ -215,7 +216,7 @@ const ContactModal = ({ openModal, setOpenModal }: ContactModalProps) => {
                       />
                       <label 
                         htmlFor="floating_name"
-                        className={`absolute text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-[#FE6623] peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6`}
+                        className={`absolute text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-primary peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6`}
                       >
                         Your Name
                       </label>
@@ -247,7 +248,7 @@ const ContactModal = ({ openModal, setOpenModal }: ContactModalProps) => {
                       />
                       <label 
                         htmlFor="floating_email"
-                        className={`absolute text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-[#FE6623] peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6`}
+                        className={`absolute text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-primary peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6`}
                       >
                         Email Address
                       </label>
@@ -278,7 +279,7 @@ const ContactModal = ({ openModal, setOpenModal }: ContactModalProps) => {
                       />
                       <label 
                         htmlFor="floating_phone"
-                        className={`absolute text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-[#FE6623] peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6`}
+                        className={`absolute text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-primary peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6`}
                       >
                         Phone Number (optional)
                       </label>
@@ -309,7 +310,7 @@ const ContactModal = ({ openModal, setOpenModal }: ContactModalProps) => {
                       ></textarea>
                       <label 
                         htmlFor="floating_message"
-                        className={`absolute text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-[#FE6623] peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6`}
+                        className={`absolute text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-primary peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6`}
                       >
                         Message
                       </label>
@@ -322,35 +323,15 @@ const ContactModal = ({ openModal, setOpenModal }: ContactModalProps) => {
                       className="mt-6 text-center"
                       variants={itemVariants}
                     >
-                      <motion.button 
-                        type="submit"
-                        className="bg-[#fe6623] hover:bg-[#fe6623]/90 border-0 transition-all duration-300 rounded-full text-lg py-3 px-12 text-white relative overflow-hidden"
-                        whileHover={{ 
-                          scale: 1.03,
-                          boxShadow: "0 10px 15px -3px rgba(254, 102, 35, 0.2), 0 4px 6px -2px rgba(254, 102, 35, 0.1)"
-                        }}
-                        whileTap={{ scale: 0.97 }}
-                        disabled={isSubmitting}
-                      >
-                        <motion.span
-                          className="absolute inset-0 bg-white/20"
-                          initial={{ x: "-100%" }}
-                          whileHover={{ x: "100%" }}
-                          transition={{ duration: 0.5 }}
+                      <Button
+                          text={isSubmitting ? "Sending..." : "Send Message"}
+                          variant="primary"
+                          size="lg"
+                          type="submit"
+                          loading={isSubmitting}
+                          disabled={isSubmitting}
+                          className="shadow-primary"
                         />
-                        
-                        {isSubmitting ? (
-                          <div className="flex items-center justify-center">
-                            <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                              <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                              <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                            </svg>
-                            Sending...
-                          </div>
-                        ) : (
-                          <span>Send Message</span>
-                        )}
-                      </motion.button>
                     </motion.div>
                   </div>
                 </form>

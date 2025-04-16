@@ -141,7 +141,7 @@ const HeroSection = ({ onBookDemo }: HeroSectionProps) => {
                 text="Book a Demo"
                 variant="primary"
                 size="lg"
-                className="shadow-lg hover:shadow-xl transform hover:-translate-y-1"
+                className="primary"
               />
               
               <div className="hidden md:block h-14 w-px bg-white/30 mx-2"></div>

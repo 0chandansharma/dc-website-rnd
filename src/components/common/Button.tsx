@@ -9,12 +9,13 @@ interface ButtonProps {
   text: string;
   className?: string;
   variant?: "primary" | "secondary" | "outline" | "ghost";
-  size?: "sm" | "md" | "lg";
+  size?: "sm" | "md" | "lg" | "login" |"compact";
   icon?: React.ReactNode;
   iconPosition?: "left" | "right";
   disabled?: boolean;
   loading?: boolean;
   fullWidth?: boolean;
+  type?: "button" | "submit" | "reset";
 }
 
 const Button = ({ 
@@ -28,21 +29,22 @@ const Button = ({
   iconPosition = "right",
   disabled = false,
   loading = false,
-  fullWidth = false
+  fullWidth = false,
+  type = "button"
 }: ButtonProps) => {
   
   const getVariantClasses = () => {
     switch (variant) {
       case "primary":
-        return "bg-[#FE6623] text-white border-[#FE6623] hover:bg-transparent hover:text-[#FE6623]";
+        return "bg-primary text-white border-primary hover:bg-primary-hover hover:border-primary-hover";
       case "secondary":
-        return "bg-transparent text-white border-[#FE6623] hover:bg-[#FE6623]";
+        return "bg-white text-primary border-primary hover:bg-primary-50";
       case "outline":
-        return "bg-transparent text-[#FE6623] border-[#FE6623] hover:bg-[#FE6623] hover:text-white";
+        return "bg-transparent text-primary border-primary hover:bg-primary-50";
       case "ghost":
-        return "bg-transparent text-[#FE6623] border-transparent hover:bg-[#FE6623]/10";
+        return "bg-transparent text-primary border-transparent hover:bg-primary-50";
       default:
-        return "bg-[#FE6623] text-white border-[#FE6623] hover:bg-transparent hover:text-[#FE6623]";
+        return "bg-primary text-white border-primary hover:bg-primary-hover hover:border-primary-hover";
     }
   };
   
@@ -54,18 +56,23 @@ const Button = ({
         return "py-2.5 px-6 text-base";
       case "lg":
         return "py-3 px-8 text-lg";
+      case "login": // New size specifically for login
+        return "py-2 px-10 text-base"; // Wider padding
+      case "compact": // New size for buttons that need to be less wide
+        return "py-2.5 px-5 text-base"; // Narrower padding
       default:
         return "py-2.5 px-6 text-base";
-    }
+      }
   };
   
   const getWidthClass = () => fullWidth ? "w-full" : "";
   
   const getDisabledClass = () => disabled ? "opacity-50 cursor-not-allowed" : "";
   
+  const baseClasses = "inline-flex items-center justify-center border transition-all duration-300 rounded-full font-medium focus:outline-none focus:ring-2 focus:ring-primary-300 focus:ring-offset-2";
+  
   const buttonClasses = `
-    inline-flex items-center justify-center
-    border transition-all duration-300 rounded-full
+    ${baseClasses}
     ${getVariantClasses()} 
     ${getSizeClasses()} 
     ${getWidthClass()}
@@ -103,6 +110,7 @@ const Button = ({
       whileHover={disabled ? {} : { scale: 1.03 }}
       whileTap={disabled ? {} : { scale: 0.98 }}
       disabled={disabled || loading}
+      type={type}
     >
       {renderContent()}
     </motion.button>

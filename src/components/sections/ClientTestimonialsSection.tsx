@@ -82,7 +82,7 @@ const ClientTestimonialsSection = () => {
                     <span className="heading-orange">Clients</span> Say
                   </motion.h2>
                   <motion.p 
-                    className="Helvetica-400 [margin-top:_clamp(12px,2vw,26px)] font-normal leading-[1.2] [font-size:_clamp(8px,2vw,22px)] lg:max-w-[518px] text-[#000000BF]"
+                    className="Helvetica-400 [margin-top:_clamp(12px,2vw,26px)] font-normal leading-[1.2] [font-size:_clamp(8px,2vw,22px)] lg:max-w-[518px] text-gray-800"
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
@@ -136,7 +136,7 @@ const ClientTestimonialsSection = () => {
                   </motion.div>
                   
                   <motion.a 
-                    className="text-[#FE6623] [font-size:_clamp(8px,3vw,22px)] font-normal inline-flex items-center"
+                    className="text-primary [font-size:_clamp(8px,3vw,22px)] font-normal inline-flex items-center"
                     href="#"
                     whileHover={{ x: 5 }}
                   >
@@ -180,7 +180,7 @@ const ClientTestimonialsSection = () => {
                   {testimonials.map((testimonial, index) => (
                     <SwiperSlide key={index}>
                       <motion.div 
-                        className="rounded-[24px] bg-white p-8 shadow-lg h-full flex flex-col"
+                        className="rounded-xl bg-white p-8 shadow-lg h-full flex flex-col"
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
@@ -188,7 +188,7 @@ const ClientTestimonialsSection = () => {
                         whileHover={{ y: -10, boxShadow: "0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)" }}
                       >
                         <div className="mb-6">
-                          <svg className="w-8 h-8 text-[#FE6623]" fill="currentColor" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+                          <svg className="w-8 h-8 text-primary" fill="currentColor" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
                             <path d="M10.722 6.065c.913.447 1.672 1.012 2.274 1.694.603.681 1.064 1.472 1.395 2.363.33.892.496 1.833.496 2.823 0 1.464-.286 2.818-.858 4.063-.573 1.245-1.42 2.333-2.54 3.264l-4.71 3.865 1.099 2.51h6.102l2.88-5.485-1.542-.682c1.038-.67 1.881-1.492 2.536-2.467.646-.965 1.164-1.995 1.568-3.091.394-1.086.684-2.177.88-3.264.188-1.087.284-2.103.284-3.05 0-1.443-.29-2.818-.871-4.13-.58-1.301-1.394-2.456-2.442-3.463l-4.307-3.865-2.244 5.915zM26.29 6.065c.913.447 1.671 1.012 2.275 1.694.603.681 1.071 1.472 1.402 2.363.33.892.496 1.833.496 2.823 0 1.464-.293 2.818-.872 4.063-.58 1.245-1.427 2.333-2.54 3.264l-4.71 3.865 1.099 2.51h6.102l2.88-5.485-1.547-.682c1.044-.67 1.894-1.492 2.54-2.467.647-.965 1.159-1.995 1.56-3.091.403-1.086.694-2.177.886-3.264.191-1.087.287-2.103.287-3.05 0-1.443-.29-2.818-.872-4.13-.581-1.301-1.395-2.456-2.442-3.463L28.534 0l-2.244 5.915z"/>
                           </svg>
                         </div>

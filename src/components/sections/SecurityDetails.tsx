@@ -95,7 +95,7 @@ const SecurityDetails = () => {
                   <feature.icon 
                     className={`w-12 h-12 mr-4 ${feature.color} group-hover:scale-110 transition-transform`} 
                   />
-                  <h3 className="text-2xl font-semibold text-[#000000CC] group-hover:text-[#FE6623] transition-colors">
+                  <h3 className="text-2xl font-semibold text-[#000000CC] group-hover:text-primary transition-colors">
                     {feature.title}
                   </h3>
                 </div>
@@ -109,7 +109,7 @@ const SecurityDetails = () => {
                         className="flex items-center"
                       >
                         <svg 
-                          className="w-4 h-4 mr-2 text-[#FE6623]" 
+                          className="w-4 h-4 mr-2 text-primary" 
                           fill="none" 
                           stroke="currentColor" 
                           viewBox="0 0 24 24"
@@ -186,7 +186,7 @@ const SecurityDetails = () => {
             </div>
             <div className="bg-[#FE6623]/10 p-12 hidden md:block">
               <div className="flex items-center space-x-4">
-                <Shield className="w-16 h-16 text-[#FE6623] opacity-70" />
+                <Shield className="w-16 h-16 text-primary opacity-70" />
                 <div>
                   <h4 className="text-xl font-semibold text-[#000000CC]">24/7 Security Support</h4>
                   <p className="text-gray-600">Immediate assistance for any security inquiries</p>

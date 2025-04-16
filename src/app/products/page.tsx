@@ -79,7 +79,7 @@ const ProductsPage = () => {
 
   return (
     <Flowbite theme={{ theme: customTheme }}>
-      <Header />
+      <Header  />
       
       <main className="pt-32 pb-20">
         <div className="container max-w-[90rem] mx-auto px-5">
@@ -120,7 +120,7 @@ const ProductsPage = () => {
                     className="w-full h-full object-cover"
                   />
                   <div className="absolute top-4 left-4">
-                    <span className="bg-[#FE6623]/10 text-[#FE6623] text-xs font-medium py-1 px-3 rounded-full">
+                    <span className="bg-[#FE6623]/10 text-primary text-xs font-medium py-1 px-3 rounded-full">
                       {product.category}
                     </span>
                   </div>
@@ -144,7 +144,7 @@ const ProductsPage = () => {
                   >
                     <Link
                       href={product.link}
-                      className="text-[#FE6623] flex items-center font-medium hover:underline"
+                      className="text-primary flex items-center font-medium hover:underline"
                     >
                       <span>Learn More</span>
                       <svg className="ml-2 w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -153,7 +153,7 @@ const ProductsPage = () => {
                     </Link>
                     
                     <motion.button
-                      className="text-gray-400 hover:text-[#FE6623] p-2"
+                      className="text-gray-400 hover:text-primary p-2"
                       whileHover={{ rotate: 15, scale: 1.1 }}
                     >
                       <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">

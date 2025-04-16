@@ -148,7 +148,7 @@ const AboutUsPage = () => {
                   />
                   <div className="absolute -bottom-10 -left-10 bg-white p-6 rounded-lg shadow-lg">
                     <div className="flex items-center">
-                      <div className="text-[#FE6623] text-5xl font-bold mr-4">5+</div>
+                      <div className="text-primary text-5xl font-bold mr-4">5+</div>
                       <p className="text-gray-800">Years of innovation and excellence in AI solutions</p>
                     </div>
                   </div>
@@ -241,7 +241,7 @@ const AboutUsPage = () => {
                   />
                   <div className="p-6">
                     <h3 className="text-xl font-bold mb-1">{member.name}</h3>
-                    <p className="text-[#FE6623] mb-3">{member.position}</p>
+                    <p className="text-primary mb-3">{member.position}</p>
                     <p className="text-gray-600 text-sm">{member.bio}</p>
                   </div>
                 </motion.div>
@@ -269,7 +269,7 @@ const AboutUsPage = () => {
                   transition={{ duration: 0.5, delay: index * 0.1 }}
                 >
                   <motion.div 
-                    className="text-5xl font-bold text-[#FE6623] mb-2"
+                    className="text-5xl font-bold text-primary mb-2"
                     initial={{ scale: 0.8 }}
                     whileInView={{ scale: 1 }}
                     viewport={{ once: true }}
@@ -314,7 +314,7 @@ const AboutUsPage = () => {
                   Schedule a Demo
                 </motion.button>
                 <motion.button
-                  className="border-2 border-[#FE6623] text-[#FE6623] py-3 px-8 rounded-full font-medium hover:bg-[#FE6623]/10 transition-all duration-300"
+                  className="border-2 border-[#FE6623] text-primary py-3 px-8 rounded-full font-medium hover:bg-[#FE6623]/10 transition-all duration-300"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >

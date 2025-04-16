@@ -47,15 +47,15 @@ export default function HealthcareAIBlogPost() {
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 my-12">
             <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-100 text-center">
-              <h3 className="text-4xl font-bold text-[#FE6623] mb-2">87%</h3>
+              <h3 className="text-4xl font-bold text-primary mb-2">87%</h3>
               <p className="text-gray-700">of patients report frustration with wait times</p>
             </div>
             <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-100 text-center">
-              <h3 className="text-4xl font-bold text-[#FE6623] mb-2">62%</h3>
+              <h3 className="text-4xl font-bold text-primary mb-2">62%</h3>
               <p className="text-gray-700">of medical errors are due to miscommunication</p>
             </div>
             <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-100 text-center">
-              <h3 className="text-4xl font-bold text-[#FE6623] mb-2">40%</h3>
+              <h3 className="text-4xl font-bold text-primary mb-2">40%</h3>
               <p className="text-gray-700">reduction in wait times with AI scheduling</p>
             </div>
           </div>

@@ -1,7 +1,7 @@
 // src/components/sections/SpecializeSection.tsx
 import React from "react";
 import { motion, useMotionValue, useTransform } from "framer-motion";
-
+import Button from "@/components/common/Button";
 interface SpecializeSectionProps {
   onBookDemo: () => void;
 }
@@ -85,7 +85,7 @@ const SpecializeSection = ({ onBookDemo }: SpecializeSectionProps) => {
           <div className="basis-full md:basis-8/12 lg:basis-6/12">
             {/* Content Box */}
             <motion.div
-              className="bg-[#FFFFFFEE] backdrop-blur-sm border rounded-[24px] shadow-2xl hover:shadow-3xl transition-shadow duration-500 ease-in-out overflow-hidden"
+              className="bg-[#FFFFFFEE] backdrop-blur-sm border rounded-xl shadow-2xl hover:shadow-3xl transition-shadow duration-500 ease-in-out overflow-hidden"
               initial={{ opacity: 0, y: 50 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ 
@@ -97,7 +97,7 @@ const SpecializeSection = ({ onBookDemo }: SpecializeSectionProps) => {
               }}
             >
               <motion.div
-                className="[padding-top:_clamp(20px,4vw,62px)] [padding-bottom:_clamp(20px,4vw,62px)] [padding-left:_clamp(20px,4vw,42px)] [padding-right:_clamp(20px,4vw,42px)]"
+                className="pt-xl [padding-bottom:_clamp(20px,4vw,62px)] [padding-left:_clamp(20px,4vw,42px)] [padding-right:_clamp(20px,4vw,42px)]"
                 variants={containerVariants}
                 initial="hidden"
                 whileInView="visible"
@@ -159,7 +159,7 @@ const SpecializeSection = ({ onBookDemo }: SpecializeSectionProps) => {
 
                 {/* Description */}
                 <motion.p
-                  className="[font-size:_clamp(8px,2vw,22px)] [margin-bottom:_clamp(21px,2vw,40px)] font-normal leading-normal text-[#000000BF]"
+                  className="[font-size:_clamp(8px,2vw,22px)] [margin-bottom:_clamp(21px,2vw,40px)] font-normal leading-normal text-gray-800"
                   variants={itemVariants}
                 >
                   A forward-thinking AI company dedicated to delivering intelligent, scalable solutions. Driving innovation and progress across diverse industries with expertise and impact.
@@ -178,43 +178,35 @@ const SpecializeSection = ({ onBookDemo }: SpecializeSectionProps) => {
                       whileHover={{ x: 5 }}
                     >
                       <div className="flex-shrink-0 w-8 h-8 rounded-full bg-[#FE6623]/10 flex items-center justify-center mr-3">
-                        <svg className="w-4 h-4 text-[#FE6623]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <svg className="w-4 h-4 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                         </svg>
                       </div>
                       <div>
                         <h3 className="text-[#000000] font-medium mb-1">{feature.title}</h3>
-                        <p className="text-[#000000BF] text-sm">{feature.description}</p>
+                        <p className="text-gray-800 text-sm">{feature.description}</p>
                       </div>
                     </motion.div>
                   ))}
                 </motion.div>
 
                 {/* Button */}
-                <motion.a
-                  className="relative bg-[#FE6623E3] overflow-hidden leading-[1.2] [padding-left:_clamp(2px,2vw,20px)] [padding-right:_clamp(2px,2vw,20px)] [padding-top:_clamp(1px,2vw,7px)] [padding-bottom:_clamp(1px,2vw,7px)] [font-size:_clamp(8px,2vw,22px)] border border-[#FE6623] rounded-[32px] inline-flex items-center text-[#ffffffe6] hover:scale-105 transition-all duration-300"
-                  href="#"
-                  onClick={onBookDemo}
-                  variants={itemVariants}
-                  whileHover={{ scale: 1.05, backgroundColor: "#fe6623" }}
-                  whileTap={{ scale: 0.98 }}
-                >
-                  <motion.span 
-                    className="absolute inset-0 bg-white/20"
-                    initial={{ x: "-100%" }}
-                    whileHover={{ x: "100%" }}
-                    transition={{ duration: 0.6 }}
+                <Button 
+                    onClick={onBookDemo}
+                    text="Book a Demo"
+                    variant="primary"
+                    size="lg"
+                    icon={
+                      <svg 
+                        className="w-5 h-5" 
+                        fill="none" 
+                        stroke="currentColor" 
+                        viewBox="0 0 24 24"
+                      >
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                      </svg>
+                    }
                   />
-                  <span className="z-10">Book a Demo</span>
-                  <svg 
-                    className="w-5 h-5 ml-2 z-10" 
-                    fill="none" 
-                    stroke="currentColor" 
-                    viewBox="0 0 24 24"
-                  >
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                  </svg>
-                </motion.a>
               </motion.div>
             </motion.div>
           </div>

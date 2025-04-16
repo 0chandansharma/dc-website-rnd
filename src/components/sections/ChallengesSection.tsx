@@ -144,7 +144,7 @@ const ChallengesSection = () => {
               ].map((challenge, index) => (
                 <motion.div 
                   key={index} 
-                  className="flex flex-col justify-between [padding:_clamp(10px,2vw,30px)] border rounded-[24px] border-[#292C330F]"
+                  className="flex flex-col justify-between [padding:_clamp(10px,2vw,30px)] border rounded-xl border-[#292C330F]"
                   variants={cardVariants}
                   whileHover="hover"
                 >
@@ -152,7 +152,7 @@ const ChallengesSection = () => {
                     <h3 className="text-[#000000D9] leading-[1.3] font-normal [margin-bottom:_clamp(8px,2vw,40px)] [font-size:_clamp(8px,3vw,26px)]">
                       {challenge.title}
                     </h3>
-                    <p className="text-[#000000BF] max-w-[363px] [font-size:_clamp(8px,2vw,18px)] [margin-bottom:_clamp(8px,2vw,40px)] font-normal">
+                    <p className="text-gray-800 max-w-[363px] [font-size:_clamp(8px,2vw,18px)] [margin-bottom:_clamp(8px,2vw,40px)] font-normal">
                       {challenge.description}
                     </p>
                   </div>

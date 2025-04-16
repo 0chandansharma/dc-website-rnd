@@ -77,7 +77,7 @@ const BlogSidebar: React.FC<BlogSidebarProps> = ({ currentSlug }) => {
                 className="w-16 h-16 object-cover rounded-md mr-3 flex-shrink-0"
               />
               <div>
-                <h4 className="text-sm font-medium group-hover:text-[#FE6623] transition-colors line-clamp-2">
+                <h4 className="text-sm font-medium group-hover:text-primary transition-colors line-clamp-2">
                   {post.title}
                 </h4>
                 <span className="text-xs text-gray-500">{post.date}</span>
@@ -100,7 +100,7 @@ const BlogSidebar: React.FC<BlogSidebarProps> = ({ currentSlug }) => {
             <Link 
               key={category}
               href={`/blog/category/${encodeURIComponent(category)}`}
-              className="block py-1 hover:text-[#FE6623] transition-colors"
+              className="block py-1 hover:text-primary transition-colors"
             >
               {category}
             </Link>
@@ -121,7 +121,7 @@ const BlogSidebar: React.FC<BlogSidebarProps> = ({ currentSlug }) => {
             <Link 
               key={tag}
               href={`/blog/tag/${encodeURIComponent(tag)}`}
-              className="bg-gray-100 text-gray-700 px-3 py-1 text-xs rounded-full hover:bg-[#FE6623]/10 hover:text-[#FE6623] transition-colors"
+              className="bg-gray-100 text-gray-700 px-3 py-1 text-xs rounded-full hover:bg-[#FE6623]/10 hover:text-primary transition-colors"
             >
               {tag}
             </Link>

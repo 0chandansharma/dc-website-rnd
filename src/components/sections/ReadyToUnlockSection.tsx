@@ -137,64 +137,38 @@ const ReadyToUnlockSection = ({ onBookDemo }: ReadyToUnlockSectionProps) => {
                 className="flex flex-col md:flex-row justify-center items-center gap-6 mt-12"
                 variants={itemVariants}
               >
-                <motion.div
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  <Button
+                <Button
                     text="Book a Demo"
                     variant="primary"
                     size="lg"
                     onClick={onBookDemo}
-                    className="shadow-md relative overflow-hidden group"
+                    className="shadow-primary"
                     icon={
-                      <motion.svg 
-                        className="w-5 h-5 ml-2 group-hover:rotate-45" 
-                        initial={{ rotate: 0 }}
-                        whileHover={{ rotate: 45, transition: { duration: 0.3 } }}
+                      <svg 
+                        className="w-5 h-5" 
                         fill="none" 
                         viewBox="0 0 24 24" 
                         stroke="currentColor"
                       >
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
-                      </motion.svg>
+                      </svg>
                     }
                     iconPosition="right"
                   />
-                  {/* Button shine effect */}
-                  <motion.div 
-                    className="absolute inset-0 bg-white opacity-0 pointer-events-none"
-                    animate={{ 
-                      x: ["100%", "-100%"], 
-                      opacity: [0, 0.3, 0],
-                    }}
-                    transition={{ 
-                      repeat: Infinity, 
-                      repeatType: "loop",
-                      duration: 2.5,
-                      repeatDelay: 4
-                    }}
-                  />
-                </motion.div>
-                
-                <motion.div
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                >
+
                   <Button
                     text="Explore Solutions"
                     variant="outline"
                     size="lg"
                     href="/solutions"
-                    className="backdrop-blur-sm bg-white/10 hover:bg-white/20"
+                    className="backdrop-blur-sm"
                     icon={
-                      <svg className="w-5 h-5 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
                       </svg>
                     }
                     iconPosition="right"
                   />
-                </motion.div>
               </motion.div>
               
               <motion.div
@@ -262,7 +236,7 @@ const ReadyToUnlockSection = ({ onBookDemo }: ReadyToUnlockSectionProps) => {
                       whileHover={{ y: -5 }}
                     >
                       <motion.div 
-                        className="text-3xl md:text-4xl font-bold text-[#FE6623]"
+                        className="text-3xl md:text-4xl font-bold text-primary"
                         initial={{ opacity: 0 }}
                         whileInView={{ opacity: 1 }}
                         viewport={{ once: true }}

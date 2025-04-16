@@ -157,7 +157,7 @@ const CollaboratorsSection = () => {
             >
               {/* Partnership Card */}
               <motion.div 
-                className="bg-white rounded-[24px] p-8 shadow-sm hover:shadow-lg transition-all duration-300 border border-gray-100"
+                className="bg-white rounded-xl p-8 shadow-sm hover:shadow-lg transition-all duration-300 border border-gray-100"
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5 }}
@@ -168,7 +168,7 @@ const CollaboratorsSection = () => {
               >
                 <div className="flex items-center mb-6">
                   <div className="w-12 h-12 rounded-full bg-[#FE6623]/10 flex items-center justify-center mr-4">
-                    <svg className="w-6 h-6 text-[#FE6623]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <svg className="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
                     </svg>
                   </div>
@@ -195,7 +195,7 @@ const CollaboratorsSection = () => {
               
               {/* Testimonial Card */}
               <motion.div 
-                className="bg-[#1316310D]/5 rounded-[24px] p-8 shadow-sm hover:shadow-lg transition-all duration-300 border border-gray-100"
+                className="bg-[#1316310D]/5 rounded-xl p-8 shadow-sm hover:shadow-lg transition-all duration-300 border border-gray-100"
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.2 }}
@@ -206,7 +206,7 @@ const CollaboratorsSection = () => {
               >
                 <div className="flex items-center mb-6">
                   <div className="w-12 h-12 rounded-full bg-[#FE6623]/10 flex items-center justify-center mr-4">
-                    <svg className="w-6 h-6 text-[#FE6623]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <svg className="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
                     </svg>
                   </div>
@@ -219,7 +219,7 @@ const CollaboratorsSection = () => {
                   whileInView={{ opacity: 1, x: 0 }}
                   transition={{ delay: 0.4 }}
                 >
-                  <svg className="absolute top-0 left-0 w-4 h-4 -ml-2 text-[#FE6623]" fill="currentColor" viewBox="0 0 24 24">
+                  <svg className="absolute top-0 left-0 w-4 h-4 -ml-2 text-primary" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-10zm-14 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.999v10h-9.999z" />
                   </svg>
                   <p className="text-gray-600 italic">
@@ -234,7 +234,7 @@ const CollaboratorsSection = () => {
                 >
                   <Link 
                     href="/testimonials"
-                    className="inline-flex items-center text-[#FE6623] hover:underline"
+                    className="inline-flex items-center text-primary hover:underline"
                   >
                     <span>Read more success stories</span>
                     <svg className="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -247,7 +247,7 @@ const CollaboratorsSection = () => {
             
             {/* Collaboration Stats */}
             <motion.div 
-              className="mt-16 bg-white rounded-[24px] p-8 shadow-sm border border-gray-100"
+              className="mt-16 bg-white rounded-xl p-8 shadow-sm border border-gray-100"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
@@ -273,7 +273,7 @@ const CollaboratorsSection = () => {
                     whileHover={{ y: -5 }}
                   >
                     <motion.div 
-                      className="text-3xl md:text-4xl font-bold text-[#FE6623]"
+                      className="text-3xl md:text-4xl font-bold text-primary"
                       initial={{ scale: 0.8 }}
                       whileInView={{ scale: 1 }}
                       transition={{ 

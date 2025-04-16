@@ -68,7 +68,7 @@ const AuthorPage = () => {
                   </h1>
                   
                   {authorInfo.title && (
-                    <p className="text-xl text-[#FE6623] mb-6">{authorInfo.title}</p>
+                    <p className="text-xl text-primary mb-6">{authorInfo.title}</p>
                   )}
                   
                   {authorInfo.bio && (
@@ -81,7 +81,7 @@ const AuthorPage = () => {
                         <a 
                           key={social.platform} 
                           href={social.url} 
-                          className="text-gray-500 hover:text-[#FE6623] transition-colors"
+                          className="text-gray-500 hover:text-primary transition-colors"
                           target="_blank"
                           rel="noopener noreferrer"
                         >
@@ -100,7 +100,7 @@ const AuthorPage = () => {
                   
                   <Link 
                     href="/blog" 
-                    className="inline-flex items-center text-[#FE6623] hover:underline"
+                    className="inline-flex items-center text-primary hover:underline"
                   >
                     <svg className="mr-2 w-4 h-4 rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
@@ -138,7 +138,7 @@ const AuthorPage = () => {
                   </p>
                   <Link 
                     href="/blog" 
-                    className="mt-4 inline-block text-[#FE6623]"
+                    className="mt-4 inline-block text-primary"
                   >
                     View all posts
                   </Link>

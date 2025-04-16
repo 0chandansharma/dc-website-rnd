@@ -16,7 +16,7 @@ export const customTheme = {
       content: {
         base: "relative h-screen w-full p-0 ",
         inner:
-          "relative flex max-h-screen h-screen flex-col bg-image-modal rounded-[24px]",
+          "relative flex max-h-screen h-screen flex-col bg-image-modal rounded-xl",
       },
       header: {
         base: "flex  !bg-transparent lg:!px-[200px] items-start justify-start",

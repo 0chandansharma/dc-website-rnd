@@ -139,7 +139,7 @@ const Footer = () => {
                     transition={{ type: "spring", stiffness: 400 }}
                   >
                     <Link
-                      className="text-[#6D6F7F] hover:text-[#FE6623] transition-colors duration-300"
+                      className="text-[#6D6F7F] hover:text-primary transition-colors duration-300"
                       href={social.href}
                       aria-label={social.ariaLabel}
                     >
@@ -249,7 +249,7 @@ const Footer = () => {
                       >
                         <Link
                           href={link.href}
-                          className="text-[#707070] [font-size:_clamp(10px,2vw,16px)] hover:text-[#FE6623] transition-colors duration-300 flex items-center"
+                          className="text-[#707070] [font-size:_clamp(10px,2vw,16px)] hover:text-primary transition-colors duration-300 flex items-center"
                         >
                           <motion.span 
                             className="w-0 h-[1px] bg-[#FE6623] mr-0 opacity-0"
@@ -316,7 +316,7 @@ const Footer = () => {
                   />
                   <motion.button
                     type="submit"
-                    className="absolute right-0 top-1/2 -translate-y-1/2 text-[#FE6623] hover:text-[#FE6623E3] transition-colors"
+                    className="absolute right-0 top-1/2 -translate-y-1/2 text-primary hover:text-[#FE6623E3] transition-colors"
                     whileHover={{ scale: 1.1, x: 5 }}
                     whileTap={{ scale: 0.95 }}
                     initial={{ opacity: 0 }}
@@ -374,7 +374,7 @@ const Footer = () => {
               >
                 <Link 
                   href="#" 
-                  className="text-[#292C33] text-[14px] hover:text-[#FE6623] transition-colors relative group"
+                  className="text-[#292C33] text-[14px] hover:text-primary transition-colors relative group"
                 >
                   {item}
                   <motion.span 

@@ -71,7 +71,7 @@ const BlogPostLayout: React.FC<BlogPostLayoutProps> = ({ slug, children }) => {
                 {post.categories.map(category => (
                   <motion.span 
                     key={category}
-                    className="text-[#FE6623] font-medium uppercase"
+                    className="text-primary font-medium uppercase"
                     whileHover={{ scale: 1.05 }}
                   >
                     {category}
@@ -98,7 +98,7 @@ const BlogPostLayout: React.FC<BlogPostLayoutProps> = ({ slug, children }) => {
                 <span className="text-[#5297D7]">{post.readTime}</span>
                 <div className="ml-auto flex items-center gap-3">
                   <motion.button 
-                    className="flex items-center gap-2 text-gray-600 hover:text-[#FE6623] transition-colors"
+                    className="flex items-center gap-2 text-gray-600 hover:text-primary transition-colors"
                     whileHover={{ scale: 1.05 }}
                   >
                     <svg width="18" height="20" viewBox="0 0 24 27" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -107,7 +107,7 @@ const BlogPostLayout: React.FC<BlogPostLayoutProps> = ({ slug, children }) => {
                     Share
                   </motion.button>
                   <motion.button 
-                    className="flex items-center gap-2 text-gray-600 hover:text-[#FE6623] transition-colors"
+                    className="flex items-center gap-2 text-gray-600 hover:text-primary transition-colors"
                     whileHover={{ scale: 1.05 }}
                   >
                     <svg width="18" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -157,7 +157,7 @@ const BlogPostLayout: React.FC<BlogPostLayoutProps> = ({ slug, children }) => {
                 <motion.li>
                   <motion.a
                     href="#section1"
-                    className="flex items-start gap-2 text-[12px] font-normal transition-all duration-300 text-gray-600 hover:text-[#FE6623]"
+                    className="flex items-start gap-2 text-[12px] font-normal transition-all duration-300 text-gray-600 hover:text-primary"
                     whileHover={{ x: 5 }}
                   >
                     <motion.span>•</motion.span>
@@ -197,7 +197,7 @@ const BlogPostLayout: React.FC<BlogPostLayoutProps> = ({ slug, children }) => {
                 <a 
                   key={social.platform} 
                   href={social.url} 
-                  className="text-gray-500 hover:text-[#FE6623] transition-colors"
+                  className="text-gray-500 hover:text-primary transition-colors"
                   target="_blank"
                   rel="noopener noreferrer"
                 >

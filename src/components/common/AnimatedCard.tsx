@@ -71,7 +71,7 @@ const AnimatedCard: React.FC<AnimatedCardProps> = ({
       {link && (
         <div className="mt-4">
           <motion.div 
-            className="inline-flex items-center text-[#FE6623]"
+            className="inline-flex items-center text-primary"
             whileHover={{ x: 5 }}
             transition={{ type: "spring", stiffness: 400 }}
           >

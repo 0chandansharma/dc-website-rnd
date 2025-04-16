@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Link from "next/link";
-
+import Button from "@/components/common/Button";
 interface DrivingGrowthSectionProps {
   onBookDemo: () => void;
 }
@@ -29,14 +29,14 @@ const DrivingGrowthSection = ({ onBookDemo }: DrivingGrowthSectionProps) => {
                       for Our Clients
                     </h2>
                   </div>
-                  <p className="[font-size:_clamp(16px,2vw,22px)] mb-[30px] lg:mb-[57px] leading-normal text-[#000000BF]">
+                  <p className="[font-size:_clamp(16px,2vw,22px)] mb-[30px] lg:mb-[57px] leading-normal text-gray-800">
                     From enhancing decision-making with advanced analytics to
                     streamlining operations through intelligent automation.
                   </p>
                 </div>
                 <div className="grid grid-cols-2 place-items-stretch gap gap-x-[9px] gap-y-[8px] lg:gap-x-[32px]">
                   <div
-                    className={`min-h-[120px] [padding:_clamp(13px,2vw,30px)] bordern-nn-1 rounded-[24px] bg-[#292C3305] ${
+                    className={`min-h-[120px] [padding:_clamp(13px,2vw,30px)] bordern-nn-1 rounded-xl bg-[#292C3305] ${
                       isHovered ? "cardHover" : ""
                     }`}
                     onMouseEnter={() => setIsHovered(true)}
@@ -61,7 +61,7 @@ const DrivingGrowthSection = ({ onBookDemo }: DrivingGrowthSectionProps) => {
                     </div>
                   </div>
                   <div
-                    className={`min-h-[120px] [padding:_clamp(13px,2vw,30px)] bordern-nn-1 rounded-[24px] bg-[#292C3305] ${
+                    className={`min-h-[120px] [padding:_clamp(13px,2vw,30px)] bordern-nn-1 rounded-xl bg-[#292C3305] ${
                       isHoveredTwo ? "cardHover" : ""
                     }`}
                     onMouseEnter={() => setIsHoveredTwo(true)}
@@ -86,7 +86,7 @@ const DrivingGrowthSection = ({ onBookDemo }: DrivingGrowthSectionProps) => {
                     </div>
                   </div>
                   <div
-                    className={`min-h-[120px] [padding:_clamp(13px,2vw,30px)] bordern-nn-1 rounded-[24px] bg-[#292C3305] ${
+                    className={`min-h-[120px] [padding:_clamp(13px,2vw,30px)] bordern-nn-1 rounded-xl bg-[#292C3305] ${
                       isHoveredFour ? "cardHover" : ""
                     }`}
                     onMouseEnter={() => setIsHoveredFour(true)}
@@ -111,7 +111,7 @@ const DrivingGrowthSection = ({ onBookDemo }: DrivingGrowthSectionProps) => {
                     </div>
                   </div>
                   <div
-                    className={`min-h-[120px] [padding:_clamp(13px,2vw,30px)] bordern-nn-1 flex flex-col justify-center rounded-[24px] bg-[#292C3305] ${
+                    className={`min-h-[120px] [padding:_clamp(13px,2vw,30px)] bordern-nn-1 flex flex-col justify-center rounded-xl bg-[#292C3305] ${
                       isHoveredThree ? "cardHover" : ""
                     }`}
                     onMouseEnter={() => setIsHoveredThree(true)}
@@ -133,15 +133,12 @@ const DrivingGrowthSection = ({ onBookDemo }: DrivingGrowthSectionProps) => {
                     </div>
                   </div>
                 </div>
-                {/* <div className="text-center md:text-start">
-                  <a
-                    className="bg-[#FE6623E3] leading-[1.2] [margin-top:_clamp(21px,2vw,80px)] [padding-left:_clamp(2px,2vw,20px)] [padding-right:_clamp(2px,2vw,20px)] [padding-top:_clamp(1px,2vw,7px)] [padding-bottom:_clamp(1px,2vw,7px)] [font-size:_clamp(8px,2vw,22px)] border border-[#FE6623] rounded-[32px] inline-block text-[#ffffffe6]"
-                    href="#"
-                    onClick={onBookDemo}
-                  >
-                    Book a Demo
-                  </a>
-                </div> */}
+                {/* <Button 
+                        onClick={onBookDemo}
+                        text="Book a Demo"
+                        variant="primary"
+                        size="md"
+                      /> */}
               </div>
               <div className="basis-full hidden md:block mt-[30px] md:mt-0 md:basis-6/12">
                 <div>

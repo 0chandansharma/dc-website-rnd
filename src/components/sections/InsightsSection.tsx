@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { blogPosts } from "@/data/blogData";
+import Button from "@/components/common/Button";
 
 const InsightsSection = () => {
   const [hoveredCard, setHoveredCard] = useState(null);
@@ -79,7 +80,7 @@ const InsightsSection = () => {
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
               {/* Featured Post - Large Card */}
               <motion.div
-                className="relative overflow-hidden rounded-[24px] shadow-md group h-[500px]"
+                className="relative overflow-hidden rounded-xl shadow-md group h-[500px]"
                 variants={cardVariants}
                 onHoverStart={() => setHoveredCard('featured')}
                 onHoverEnd={() => setHoveredCard(null)}
@@ -152,7 +153,7 @@ const InsightsSection = () => {
                 {secondaryPosts.map((post, index) => (
                   <motion.div 
                     key={post.slug}
-                    className="relative overflow-hidden rounded-[24px] shadow-md group h-[230px]"
+                    className="relative overflow-hidden rounded-xl shadow-md group h-[230px]"
                     variants={cardVariants}
                     onHoverStart={() => setHoveredCard(post.slug)}
                     onHoverEnd={() => setHoveredCard(null)}
@@ -204,7 +205,7 @@ const InsightsSection = () => {
                             </motion.p>
                             
                             <motion.div 
-                              className="text-[#FE6623] text-sm font-medium"
+                              className="text-primary text-sm font-medium"
                               whileHover={{ x: 5 }}
                             >
                               Read More →
@@ -228,20 +229,24 @@ const InsightsSection = () => {
                 viewport={{ once: true }}
                 transition={{ duration: 0.5 }}
               >
-                <motion.div
-                  whileHover={{ scale: 1.03 }}
-                  whileTap={{ scale: 0.97 }}
-                >
-                  <Link
-                    href="/blog"
-                    className="inline-flex items-center justify-center bg-[#fe6623] text-white py-3 px-8 rounded-full hover:bg-[#fe6623]/90 transition-all shadow-sm hover:shadow-md"
-                  >
-                    <span className="mr-2">Explore All Insights</span>
-                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <Button 
+                  text="Explore All Insights"
+                  variant="outline"
+                  size="md"
+                  href="/blog"
+                  className="text-primary border-primary hover:bg-primary-50 px-6"
+                  icon={
+                    <svg 
+                      className="w-5 h-5" 
+                      fill="none" 
+                      stroke="currentColor" 
+                      viewBox="0 0 24 24"
+                    >
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
                     </svg>
-                  </Link>
-                </motion.div>
+                  }
+                />
+
                 
                 <div className="grid grid-cols-3 gap-4 mt-8">
                   {Object.keys([...new Set(blogPosts.flatMap(post => post.categories))].reduce((acc, category) => {
@@ -253,7 +258,7 @@ const InsightsSection = () => {
                       <motion.Link
                         key={category}
                         href={`/blog?category=${category}`}
-                        className="bg-white text-gray-700 py-2 px-4 rounded-full text-sm text-center border border-gray-200 hover:border-[#FE6623] hover:text-[#FE6623] cursor-pointer transition-colors"
+                        className="bg-white text-gray-700 py-2 px-4 rounded-full text-sm text-center border border-gray-200 hover:border-[#FE6623] hover:text-primary cursor-pointer transition-colors"
                         initial={{ opacity: 0, y: 10 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
@@ -296,22 +301,21 @@ const InsightsSection = () => {
                       id="privacy-policy"
                       name="privacy-policy"
                       type="checkbox"
-                      className="h-4 w-4 text-[#FE6623] focus:ring-[#FE6623]"
+                      className="h-4 w-4 text-primary focus:ring-[#FE6623]"
                       required
                     />
                     <label htmlFor="privacy-policy" className="ml-2 block text-sm text-gray-600">
-                      I agree to the <a href="#" className="text-[#FE6623] hover:underline">privacy policy</a>
+                      I agree to the <Link href="#" className="text-primary hover:underline">privacy policy</Link>
                     </label>
                   </div>
                   
-                  <motion.button
+                  <Button
+                    text="Subscribe Now"
+                    variant="primary"
+                    size="md"
                     type="submit"
-                    className="w-full bg-[#FE6623] text-white py-3 rounded-lg hover:bg-[#FE6623]/90 transition-colors"
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
-                  >
-                    Subscribe Now
-                  </motion.button>
+                    className="px-6" // Reduced padding
+                  />
                 </form>
               </motion.div>
             </div>

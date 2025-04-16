@@ -67,13 +67,13 @@ const BlogCard: React.FC<BlogCardProps> = ({ post, index }) => {
         </div>
 
         <Link href={`/blog/${post.slug}`} className="block group">
-          <h3 className="text-xl font-medium mb-2 group-hover:text-[#FE6623] transition-colors">
+          <h3 className="text-xl font-medium mb-2 group-hover:text-primary transition-colors">
             {post.title}
           </h3>
           <p className="text-gray-600 line-clamp-3 mb-4">
             {post.excerpt}
           </p>
-          <div className="flex items-center font-medium text-[#FE6623]">
+          <div className="flex items-center font-medium text-primary">
             <span>Read more</span>
             <svg 
               className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" 

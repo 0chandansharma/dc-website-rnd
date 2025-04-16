@@ -60,7 +60,7 @@ const CategoryPage = () => {
               </p>
               <Link 
                 href="/blog" 
-                className="inline-flex items-center text-[#FE6623] hover:underline"
+                className="inline-flex items-center text-primary hover:underline"
               >
                 <svg className="mr-2 w-4 h-4 rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
@@ -87,7 +87,7 @@ const CategoryPage = () => {
                   </p>
                   <Link 
                     href="/blog" 
-                    className="mt-4 inline-block text-[#FE6623]"
+                    className="mt-4 inline-block text-primary"
                   >
                     View all posts
                   </Link>

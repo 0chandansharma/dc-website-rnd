@@ -60,7 +60,7 @@ const DocuratePage = () => {
                     Book a Demo
                   </motion.button>
                   <motion.button
-                    className="border-2 border-[#FE6623] text-[#FE6623] py-3 px-8 rounded-full font-medium hover:bg-[#FE6623]/10 transition-all duration-300"
+                    className="border-2 border-[#FE6623] text-primary py-3 px-8 rounded-full font-medium hover:bg-[#FE6623]/10 transition-all duration-300"
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                   >
@@ -297,15 +297,15 @@ const DocuratePage = () => {
                   <h3 className="text-2xl font-bold mb-4">Create New Project</h3>
                   <ul className="space-y-3">
                     <li className="flex items-start gap-2">
-                      <div className="text-[#FE6623] font-bold mt-1">•</div>
+                      <div className="text-primary font-bold mt-1">•</div>
                       <p>Add project name and select document type</p>
                     </li>
                     <li className="flex items-start gap-2">
-                      <div className="text-[#FE6623] font-bold mt-1">•</div>
+                      <div className="text-primary font-bold mt-1">•</div>
                       <p>Upload documents – supports both single and bulk uploads</p>
                     </li>
                     <li className="flex items-start gap-2">
-                      <div className="text-[#FE6623] font-bold mt-1">•</div>
+                      <div className="text-primary font-bold mt-1">•</div>
                       <p>Assign validators to the project</p>
                     </li>
                   </ul>
@@ -342,15 +342,15 @@ const DocuratePage = () => {
                   </p>
                   <ul className="space-y-3">
                     <li className="flex items-start gap-2">
-                      <div className="text-[#FE6623] font-bold mt-1">•</div>
+                      <div className="text-primary font-bold mt-1">•</div>
                       <p>Monitor project progress and document status</p>
                     </li>
                     <li className="flex items-start gap-2">
-                      <div className="text-[#FE6623] font-bold mt-1">•</div>
+                      <div className="text-primary font-bold mt-1">•</div>
                       <p>Track validation accuracy and AI performance</p>
                     </li>
                     <li className="flex items-start gap-2">
-                      <div className="text-[#FE6623] font-bold mt-1">•</div>
+                      <div className="text-primary font-bold mt-1">•</div>
                       <p>Review documents requiring manual attention</p>
                     </li>
                   </ul>
@@ -387,15 +387,15 @@ const DocuratePage = () => {
                   </p>
                   <ul className="space-y-3">
                     <li className="flex items-start gap-2">
-                      <div className="text-[#FE6623] font-bold mt-1">•</div>
+                      <div className="text-primary font-bold mt-1">•</div>
                       <p>See document details including type, progress, upload date, and validation date</p>
                     </li>
                     <li className="flex items-start gap-2">
-                      <div className="text-[#FE6623] font-bold mt-1">•</div>
+                      <div className="text-primary font-bold mt-1">•</div>
                       <p>Check assignee information and AI accuracy percentage</p>
                     </li>
                     <li className="flex items-start gap-2">
-                      <div className="text-[#FE6623] font-bold mt-1">•</div>
+                      <div className="text-primary font-bold mt-1">•</div>
                       <p>Review auto-action validation results and make adjustment decisions</p>
                     </li>
                   </ul>
@@ -432,15 +432,15 @@ const DocuratePage = () => {
                   </p>
                   <ul className="space-y-3">
                     <li className="flex items-start gap-2">
-                      <div className="text-[#FE6623] font-bold mt-1">•</div>
+                      <div className="text-primary font-bold mt-1">•</div>
                       <p>View project details and verification status</p>
                     </li>
                     <li className="flex items-start gap-2">
-                      <div className="text-[#FE6623] font-bold mt-1">•</div>
+                      <div className="text-primary font-bold mt-1">•</div>
                       <p>Edit and correct OCR data with the interactive canvas</p>
                     </li>
                     <li className="flex items-start gap-2">
-                      <div className="text-[#FE6623] font-bold mt-1">•</div>
+                      <div className="text-primary font-bold mt-1">•</div>
                       <p>Access other documents in the same project for cross-reference</p>
                     </li>
                   </ul>
@@ -544,7 +544,7 @@ const DocuratePage = () => {
                   Schedule a Demo
                 </motion.button>
                 <motion.button
-                  className="border-2 border-[#FE6623] text-[#FE6623] py-3 px-8 rounded-full font-medium hover:bg-[#FE6623]/10 transition-all duration-300"
+                  className="border-2 border-[#FE6623] text-primary py-3 px-8 rounded-full font-medium hover:bg-[#FE6623]/10 transition-all duration-300"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >

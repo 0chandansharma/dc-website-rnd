@@ -57,7 +57,7 @@ const RelatedPosts: React.FC<RelatedPostsProps> = ({ posts }) => {
                     />
                   </div>
                   <div className="p-4">
-                    <h3 className="text-lg font-medium mb-2 hover:text-[#FE6623] transition-colors line-clamp-2">
+                    <h3 className="text-lg font-medium mb-2 hover:text-primary transition-colors line-clamp-2">
                       {post.title}
                     </h3>
                     <div className="flex items-center text-sm text-gray-500">
@@ -79,7 +79,7 @@ const RelatedPosts: React.FC<RelatedPostsProps> = ({ posts }) => {
           >
             <Link 
               href="/blog"
-              className="inline-flex items-center text-[#FE6623] font-medium hover:underline"
+              className="inline-flex items-center text-primary font-medium hover:underline"
             >
               <span>View all articles</span>
               <svg className="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">

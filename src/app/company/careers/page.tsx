@@ -143,7 +143,7 @@ const CareersPage = () => {
                   transition={{ duration: 0.5, delay: index * 0.1 }}
                   whileHover={{ y: -5 }}
                 >
-                  <div className="bg-[#FE6623]/10 rounded-full py-1 px-4 text-[#FE6623] text-sm font-medium inline-block mb-4">
+                  <div className="bg-[#FE6623]/10 rounded-full py-1 px-4 text-primary text-sm font-medium inline-block mb-4">
                     {job.department}
                   </div>
                   <h3 className="text-2xl font-bold mb-2">{job.title}</h3>
@@ -154,7 +154,7 @@ const CareersPage = () => {
                   </div>
                   <p className="text-gray-700 mb-6">{job.description}</p>
                   <button 
-                    className="text-[#FE6623] font-medium hover:underline"
+                    className="text-primary font-medium hover:underline"
                     onClick={() => {
                       document.getElementById('application-form').scrollIntoView({ 
                         behavior: 'smooth'
@@ -293,7 +293,7 @@ const CareersPage = () => {
                       id="resume"
                       name="resume"
                       type="file"
-                      className="w-full text-gray-700 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:bg-[#FE6623]/10 file:text-[#FE6623] hover:file:bg-[#FE6623]/20"
+                      className="w-full text-gray-700 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:bg-[#FE6623]/10 file:text-primary hover:file:bg-[#FE6623]/20"
                     />
                   </div>
                   

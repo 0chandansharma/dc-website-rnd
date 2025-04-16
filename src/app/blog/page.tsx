@@ -98,7 +98,7 @@ const BlogPage = () => {
                     Try adjusting your search or filter to find what you're looking for.
                   </p>
                   <button 
-                    className="mt-4 text-[#FE6623]"
+                    className="mt-4 text-primary"
                     onClick={() => {
                       setSelectedCategory("all");
                       setSearchTerm("");
