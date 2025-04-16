@@ -1,3 +1,4 @@
+// src/components/blog/BlogFilter.tsx
 import React from 'react';
 import { motion } from 'framer-motion';
 
@@ -17,10 +18,11 @@ const BlogFilter: React.FC<BlogFilterProps> = ({
   // Define your blog categories
   const categories = [
     { id: 'all', name: 'All Posts' },
+    { id: 'healthcare', name: 'Healthcare' },
     { id: 'ai', name: 'Artificial Intelligence' },
     { id: 'machine-learning', name: 'Machine Learning' },
-    { id: 'healthcare', name: 'Healthcare' },
     { id: 'finance', name: 'Finance' },
+    { id: 'ethics', name: 'Ethics' },
     { id: 'tutorials', name: 'Tutorials' }
   ];
 

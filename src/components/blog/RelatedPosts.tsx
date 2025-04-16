@@ -22,6 +22,8 @@ interface RelatedPostsProps {
 }
 
 const RelatedPosts: React.FC<RelatedPostsProps> = ({ posts }) => {
+  if (!posts || posts.length === 0) return null;
+  
   return (
     <section className="py-16 bg-gray-50">
       <div className="container max-w-[90rem] mx-auto px-4">
@@ -43,17 +45,19 @@ const RelatedPosts: React.FC<RelatedPostsProps> = ({ posts }) => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
+                whileHover={{ y: -5 }}
               >
                 <Link href={`/blog/${post.slug}`} className="block">
                   <div className="h-40 overflow-hidden">
-                    <img 
+                    <motion.img 
                       src={post.featuredImage}
                       alt={post.title}
-                      className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+                      className="w-full h-full object-cover transition-transform duration-300"
+                      whileHover={{ scale: 1.05 }}
                     />
                   </div>
                   <div className="p-4">
-                    <h3 className="text-lg font-medium mb-2 hover:text-[#FE6623] transition-colors">
+                    <h3 className="text-lg font-medium mb-2 hover:text-[#FE6623] transition-colors line-clamp-2">
                       {post.title}
                     </h3>
                     <div className="flex items-center text-sm text-gray-500">
@@ -66,6 +70,23 @@ const RelatedPosts: React.FC<RelatedPostsProps> = ({ posts }) => {
               </motion.div>
             ))}
           </div>
+          
+          <motion.div 
+            className="text-center mt-8"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.6 }}
+          >
+            <Link 
+              href="/blog"
+              className="inline-flex items-center text-[#FE6623] font-medium hover:underline"
+            >
+              <span>View all articles</span>
+              <svg className="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+              </svg>
+            </Link>
+          </motion.div>
         </div>
       </div>
     </section>

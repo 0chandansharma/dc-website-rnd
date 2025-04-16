@@ -59,7 +59,18 @@ const Header = () => {
         { name: "Careers", path: "/company/careers" },
         { name: "Contact", path: "/company/contact" }
       ]
-    }
+    },
+    // {
+    //   name: "Blog", 
+    //   path: "/blog",
+    //   dropdown: [
+    //     { name: "All Articles", path: "/blog" },
+    //     { name: "AI & Machine Learning", path: "/blog/category/ai" },
+    //     { name: "Healthcare", path: "/blog/category/healthcare" },
+    //     { name: "Technology", path: "/blog/category/technology" },
+    //     { name: "Latest Insights", path: "/blog" },
+    //   ]
+    // }
   ];
   
   useEffect(() => {

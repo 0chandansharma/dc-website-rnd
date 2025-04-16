@@ -1,3 +1,4 @@
+// src/app/blog/page.tsx
 "use client";
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
@@ -14,6 +15,8 @@ const BlogPage = () => {
   const [filteredPosts, setFilteredPosts] = useState(blogPosts);
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [searchTerm, setSearchTerm] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
+  const postsPerPage = 6;
   
   // Filter posts based on category and search term
   useEffect(() => {
@@ -29,12 +32,20 @@ const BlogPage = () => {
       const lowercasedTerm = searchTerm.toLowerCase();
       result = result.filter(post =>
         post.title.toLowerCase().includes(lowercasedTerm) ||
-        post.excerpt.toLowerCase().includes(lowercasedTerm)
+        post.excerpt.toLowerCase().includes(lowercasedTerm) ||
+        post.categories.some(cat => cat.toLowerCase().includes(lowercasedTerm))
       );
     }
     
     setFilteredPosts(result);
+    setCurrentPage(1); // Reset to first page when filtering
   }, [selectedCategory, searchTerm]);
+
+  // Get current posts for pagination
+  const indexOfLastPost = currentPage * postsPerPage;
+  const indexOfFirstPost = indexOfLastPost - postsPerPage;
+  const currentPosts = filteredPosts.slice(indexOfFirstPost, indexOfLastPost);
+  const totalPages = Math.ceil(filteredPosts.length / postsPerPage);
 
   return (
     <Flowbite theme={{ theme: customTheme }}>
@@ -98,7 +109,7 @@ const BlogPage = () => {
                 </motion.div>
               ) : (
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                  {filteredPosts.map((post, index) => (
+                  {currentPosts.map((post, index) => (
                     <BlogCard 
                       key={post.slug} 
                       post={post} 
@@ -110,33 +121,60 @@ const BlogPage = () => {
             </div>
             
             {/* Pagination */}
-            <div className="mt-16 flex justify-center">
-              <nav aria-label="Blog pagination">
-                <ul className="inline-flex items-center -space-x-px">
+            {filteredPosts.length > 0 && (
+              <div className="mt-16 flex justify-center">
+                <nav aria-label="Blog pagination">
+                  <ul className="inline-flex items-center -space-x-px">
                   <li>
-                    <a href="#" className="block px-3 py-2 ml-0 leading-tight text-gray-500 bg-white border border-gray-300 rounded-l-lg hover:bg-gray-100 hover:text-gray-700">
-                      <span className="sr-only">Previous</span>
-                      <svg aria-hidden="true" className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clipRule="evenodd"></path></svg>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#" aria-current="page" className="z-10 px-3 py-2 leading-tight text-white border border-[#FE6623] bg-[#FE6623] hover:bg-[#FE6623]/90">1</a>
-                  </li>
-                  <li>
-                    <a href="#" className="px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700">2</a>
-                  </li>
-                  <li>
-                    <a href="#" className="px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700">3</a>
-                  </li>
-                  <li>
-                    <a href="#" className="block px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 rounded-r-lg hover:bg-gray-100 hover:text-gray-700">
-                      <span className="sr-only">Next</span>
-                      <svg aria-hidden="true" className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd"></path></svg>
-                    </a>
-                  </li>
-                </ul>
-              </nav>
-            </div>
+  <button
+    onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
+    disabled={currentPage === 1}
+    className={`block px-3 py-2 ml-0 leading-tight text-gray-500 bg-white border border-gray-300 rounded-l-lg hover:bg-gray-100 hover:text-gray-700 ${
+      currentPage === 1 ? 'opacity-50 cursor-not-allowed' : ''
+    }`}
+  >
+    <span className="sr-only">Previous</span>
+    <svg aria-hidden="true" className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+      <path fillRule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clipRule="evenodd"></path>
+    </svg>
+  </button>
+</li>
+
+{/* Page numbers */}
+{Array.from({ length: totalPages }).map((_, i) => (
+  <li key={i + 1}>
+    <button
+      onClick={() => setCurrentPage(i + 1)}
+      aria-current={currentPage === i + 1 ? "page" : undefined}
+      className={`px-3 py-2 leading-tight border ${
+        currentPage === i + 1
+          ? 'z-10 text-white border-[#FE6623] bg-[#FE6623] hover:bg-[#FE6623]/90'
+          : 'text-gray-500 bg-white border-gray-300 hover:bg-gray-100 hover:text-gray-700'
+      }`}
+    >
+      {i + 1}
+    </button>
+  </li>
+))}
+
+<li>
+  <button
+    onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
+    disabled={currentPage === totalPages}
+    className={`block px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 rounded-r-lg hover:bg-gray-100 hover:text-gray-700 ${
+      currentPage === totalPages ? 'opacity-50 cursor-not-allowed' : ''
+    }`}
+  >
+    <span className="sr-only">Next</span>
+    <svg aria-hidden="true" className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+      <path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd"></path>
+    </svg>
+  </button>
+</li>
+                  </ul>
+                </nav>
+              </div>
+            )}
             
             {/* Subscribe to Blog */}
             <motion.div 
@@ -158,9 +196,13 @@ const BlogPage = () => {
                   placeholder="Enter your email address"
                   className="px-4 py-3 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-[#FE6623] focus:border-transparent max-w-xs sm:max-w-md w-full"
                 />
-                <button className="bg-[#FE6623] text-white rounded-full px-6 py-3 hover:bg-[#FE6623]/90 transition-colors">
+                <motion.button 
+                  className="bg-[#FE6623] text-white rounded-full px-6 py-3 hover:bg-[#FE6623]/90 transition-colors"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
                   Subscribe
-                </button>
+                </motion.button>
               </div>
             </motion.div>
           </div>
