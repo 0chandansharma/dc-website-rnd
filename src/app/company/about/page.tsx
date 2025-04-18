@@ -121,7 +121,7 @@ const AboutUsPage = () => {
                   A Vision Born from <span className="heading-orange">Possibility</span>
                 </h2>
                 <p className="text-lg text-gray-700 mb-6">
-                  Founded in 2020, DeeCogs began with a simple yet powerful vision: to make advanced AI accessible and impactful for businesses of all sizes. Our founders, a team of AI researchers and industry veterans, saw the potential for AI to transform how organizations operate and deliver value.
+                  Founded in 2023, DeeCogs began with a simple yet powerful vision: to make advanced AI accessible and impactful for businesses of all sizes. Our founders, a team of AI researchers and industry veterans, saw the potential for AI to transform how organizations operate and deliver value.
                 </p>
                 <p className="text-lg text-gray-700 mb-6">
                   Starting with solutions in healthcare and finance, we quickly expanded to address challenges across multiple industries. Today, we're proud to be trusted partners to organizations worldwide, helping them harness the full potential of artificial intelligence.
@@ -148,7 +148,7 @@ const AboutUsPage = () => {
                   />
                   <div className="absolute -bottom-10 -left-10 bg-white p-6 rounded-lg shadow-lg">
                     <div className="flex items-center">
-                      <div className="text-primary text-5xl font-bold mr-4">5+</div>
+                      <div className="text-primary text-5xl font-bold mr-4">2+</div>
                       <p className="text-gray-800">Years of innovation and excellence in AI solutions</p>
                     </div>
                   </div>
@@ -200,7 +200,7 @@ const AboutUsPage = () => {
         </section>
         
         {/* Team Section */}
-        <section className="py-20 bg-white">
+        {/* <section className="py-20 bg-white">
           <div className="container mx-auto px-4">
             <motion.div 
               className="text-center max-w-3xl mx-auto mb-16"
@@ -248,17 +248,17 @@ const AboutUsPage = () => {
               ))}
             </div>
           </div>
-        </section>
+        </section> */}
         
         {/* Stats Section */}
         <section className="py-20 bg-gray-900 text-white">
           <div className="container mx-auto px-4">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
               {[
-                { number: "50+", label: "Enterprise Clients" },
-                { number: "30+", label: "AI Solutions Deployed" },
-                { number: "5+", label: "Industry Verticals" },
-                { number: "98%", label: "Client Satisfaction" }
+                { number: "3+", label: "Enterprise Clients" },
+                { number: "10+", label: "AI Solutions Deployed" },
+                { number: "2+", label: "Industry Verticals" },
+                { number: "100%", label: "Client Satisfaction" }
               ].map((stat, index) => (
                 <motion.div 
                   key={index}

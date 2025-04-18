@@ -1,4 +1,4 @@
-// src/components/common/Header.tsx
+// Fix for src/components/common/Header.tsx
 "use client";
 import React, { useState, useEffect } from "react";
 import { Navbar } from "flowbite-react";
@@ -61,17 +61,6 @@ const Header = () => {
         { name: "Contact", path: "/company/contact" }
       ]
     },
-    // {
-    //   name: "Blog", 
-    //   path: "/blog",
-    //   dropdown: [
-    //     { name: "All Articles", path: "/blog" },
-    //     { name: "AI & Machine Learning", path: "/blog/category/ai" },
-    //     { name: "Healthcare", path: "/blog/category/healthcare" },
-    //     { name: "Technology", path: "/blog/category/technology" },
-    //     { name: "Latest Insights", path: "/blog" },
-    //   ]
-    // }
   ];
   
   useEffect(() => {
@@ -97,7 +86,7 @@ const Header = () => {
 
   return (
     <motion.header 
-      className={`fixed w-full z-50 transition-all duration-300 ${
+      className={`fixed w-full z-[100] transition-all duration-300 ${
         scrolled 
           ? 'bg-black/60 backdrop-blur-md py-2 shadow-lg' 
           : 'bg-black/20 backdrop-blur-sm py-4'
@@ -198,11 +187,11 @@ const Header = () => {
             </div>
           </div>
           
-          {/* Mobile Menu Toggle */}
-          <div className="xl:hidden">
+          {/* Mobile Menu Toggle - Fixed position so it's always accessible */}
+          <div className="xl:hidden ml-auto z-[100]">
             <button 
               onClick={handleMobileMenuToggle}
-              className="text-white focus:outline-none"
+              className="text-white focus:outline-none p-2"
               aria-label="Toggle menu"
             >
               {isMobileMenuOpen ? (
@@ -221,14 +210,26 @@ const Header = () => {
           <AnimatePresence>
             {isMobileMenuOpen && (
               <motion.div
-                className="xl:hidden fixed top-[70px] right-0 bottom-0 left-0 bg-black/90 z-50"
+                className="xl:hidden fixed top-0 right-0 bottom-0 left-0 bg-black/90 z-50"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.3 }}
               >
+                {/* Close button - separate from toggle to ensure it's always visible */}
+                <motion.button
+                  className="absolute top-6 right-6 text-white p-2 z-[101]"
+                  onClick={handleMobileMenuToggle}
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.9 }}
+                >
+                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                </motion.button>
+                
                 <motion.ul
-                  className="flex flex-col p-4 text-base w-full mt-4 items-start space-y-6 h-full overflow-y-auto"
+                  className="flex flex-col p-6 pt-20 text-base w-full items-start space-y-6 h-full overflow-y-auto"
                   initial={{ x: 100, opacity: 0 }}
                   animate={{ x: 0, opacity: 1 }}
                   exit={{ x: 100, opacity: 0 }}
