@@ -39,13 +39,13 @@ const BlogCard: React.FC<BlogCardProps> = ({ post, index }) => {
             className="w-full h-full object-cover transition-transform duration-700"
             whileHover={{ scale: 1.05 }}
           />
-          {post.categories.length > 0 && (
-            <div className="absolute top-4 left-4">
-              <span className="bg-[#FE6623] text-white text-xs px-3 py-1 rounded-full">
+            {post.categories.length > 0 && (
+                <div className="absolute top-4 left-4">
+                  <span className="bg-[#FE6623] text-white text-xs px-3 py-1 rounded-full">
                 {post.categories[0]}
-              </span>
-            </div>
-          )}
+                  </span>
+                </div>
+              )}
         </div>
       </Link>
 

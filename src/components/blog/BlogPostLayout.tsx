@@ -69,14 +69,14 @@ const BlogPostLayout: React.FC<BlogPostLayoutProps> = ({ slug, children }) => {
                   <path opacity="0.5" d="M6.5 11V12C6.5 12.4167 6.646 12.771 6.938 13.063C7.23 13.355 7.584 13.5007 8 13.5C8.416 13.4993 8.77033 13.3537 9.063 13.063C9.35567 12.7723 9.50133 12.418 9.5 12V11H10.5C10.9167 11 11.271 10.8543 11.563 10.563C11.855 10.2717 12.0007 9.91733 12 9.5C11.9993 9.08267 11.8537 8.72867 11.563 8.438C11.2723 8.14733 10.918 8.00133 10.5 8H9.5V7C9.5 6.58333 9.35433 6.22933 9.063 5.938C8.77167 5.64667 8.41733 5.50067 8 5.5C7.58267 5.49933 7.22867 5.64533 6.938 5.938C6.64733 6.23067 6.50133 6.58467 6.5 7V8H5.5C5.08333 8 4.72933 8.146 4.438 8.438C4.14667 8.73 4.00067 9.084 4 9.5C3.99933 9.916 4.14533 10.2703 4.438 10.563C4.73067 10.8557 5.08467 11.0013 5.5 11H6.5Z" fill="#131631" />
                 </svg>
                 {post.categories.map(category => (
-                  <motion.span 
-                    key={category}
-                    className="text-primary font-medium uppercase"
-                    whileHover={{ scale: 1.05 }}
-                  >
+                <motion.span 
+                  key={category}
+                  className="text-primary font-medium uppercase"
+                  whileHover={{ scale: 1.05 }}
+                >
                     {category}
-                  </motion.span>
-                ))}
+                </motion.span>
+              ))}
               </div>
               
               <h1 className="text-4xl md:text-5xl font-normal mb-6 text-black-400 leading-[1.2]">
