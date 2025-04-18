@@ -22,15 +22,22 @@ const BlogPostLayout: React.FC<BlogPostLayoutProps> = ({ slug, children }) => {
     // Extract headings for table of contents when component mounts
     if (post) {
       const extractHeadings = () => {
-        const content = post.content;
-        const regex = /<h2 id="([^"]+)".*?>(.+?)<\/h2>/g;
+        // Use a regex that better matches the structure of your content
+        const regex = /<section id="([^"]+)"[\s\S]*?<h2[^>]*>([\s\S]*?)<\/h2>/g;
         const headings = [];
         let match;
         
+        // Get the content as a string
+        const content = post.content;
+        
         while ((match = regex.exec(content)) !== null) {
+          const id = match[1];
+          // Clean the text of any HTML tags
+          const text = match[2].replace(/<[^>]*>/g, '').trim();
+          
           headings.push({
-            id: match[1],
-            text: match[2].replace(/<[^>]*>/g, '') // Remove any HTML tags inside heading
+            id,
+            text
           });
         }
         
@@ -128,13 +135,13 @@ const BlogPostLayout: React.FC<BlogPostLayoutProps> = ({ slug, children }) => {
                 <svg width="16" height="11" viewBox="0 0 16 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path opacity="0.5" d="M6.5 11V12C6.5 12.4167 6.646 12.771 6.938 13.063C7.23 13.355 7.584 13.5007 8 13.5C8.416 13.4993 8.77033 13.3537 9.063 13.063C9.35567 12.7723 9.50133 12.418 9.5 12V11H10.5C10.9167 11 11.271 10.8543 11.563 10.563C11.855 10.2717 12.0007 9.91733 12 9.5C11.9993 9.08267 11.8537 8.72867 11.563 8.438C11.2723 8.14733 10.918 8.00133 10.5 8H9.5V7C9.5 6.58333 9.35433 6.22933 9.063 5.938C8.77167 5.64667 8.41733 5.50067 8 5.5C7.58267 5.49933 7.22867 5.64533 6.938 5.938C6.64733 6.23067 6.50133 6.58467 6.5 7V8H5.5C5.08333 8 4.72933 8.146 4.438 8.438C4.14667 8.73 4.00067 9.084 4 9.5C3.99933 9.916 4.14533 10.2703 4.438 10.563C4.73067 10.8557 5.08467 11.0013 5.5 11H6.5Z" fill="#131631" />
                 </svg>
-                {post.categories.map(category => (
+                {post.categories.map((category, idx) => (
                 <motion.span 
                   key={category}
                   className="text-primary font-medium uppercase"
                   whileHover={{ scale: 1.05 }}
                 >
-                    {category}
+                    {category}{idx < post.categories.length - 1 ? ', ' : ''}
                 </motion.span>
               ))}
               </div>
@@ -194,6 +201,9 @@ const BlogPostLayout: React.FC<BlogPostLayoutProps> = ({ slug, children }) => {
             className="w-full h-[350px] object-cover rounded-lg shadow-md" 
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent rounded-lg"></div>
+          <div className="absolute bottom-4 left-4 text-white text-sm bg-black/50 px-3 py-1 rounded-full backdrop-blur-sm">
+            Featured Image: {post.title}
+          </div>
         </motion.div>
         
         {/* Table of Contents - Left Side */}
@@ -212,32 +222,36 @@ const BlogPostLayout: React.FC<BlogPostLayoutProps> = ({ slug, children }) => {
           >
             <div className="p-4 bg-white/80 backdrop-blur-sm rounded-lg shadow-sm">
               <h3 className="text-[14px] font-medium text-[#525252] mb-4">Table of Contents:</h3>
-              <ul className="space-y-3 text-[#525252]">
-                {tocItems.map((item) => (
-                  <motion.li key={item.id}>
-                    <motion.a
-                      href={`#${item.id}`}
-                      className={`flex items-start gap-2 text-[14px] font-normal transition-all duration-300 ${activeSection === item.id ? 'text-primary font-medium' : 'text-gray-600 hover:text-primary'}`}
-                      onClick={(e) => {
-                        e.preventDefault();
-                        scrollToSection(item.id);
-                      }}
-                      whileHover={{ x: 5 }}
-                    >
-                      <motion.span
-                        animate={{ 
-                          scale: activeSection === item.id ? [1, 1.2, 1] : 1,
-                          color: activeSection === item.id ? "#FE6623" : "#525252"
+              {tocItems.length > 0 ? (
+                <ul className="space-y-3 text-[#525252]">
+                  {tocItems.map((item) => (
+                    <motion.li key={item.id}>
+                      <motion.a
+                        href={`#${item.id}`}
+                        className={`flex items-start gap-2 text-[14px] font-normal transition-all duration-300 ${activeSection === item.id ? 'text-primary font-medium' : 'text-gray-600 hover:text-primary'}`}
+                        onClick={(e) => {
+                          e.preventDefault();
+                          scrollToSection(item.id);
                         }}
-                        transition={{ duration: 0.3 }}
+                        whileHover={{ x: 5 }}
                       >
-                        •
-                      </motion.span>
-                      {item.text}
-                    </motion.a>
-                  </motion.li>
-                ))}
-              </ul>
+                        <motion.span
+                          animate={{ 
+                            scale: activeSection === item.id ? [1, 1.2, 1] : 1,
+                            color: activeSection === item.id ? "#FE6623" : "#525252"
+                          }}
+                          transition={{ duration: 0.3 }}
+                        >
+                          •
+                        </motion.span>
+                        {item.text}
+                      </motion.a>
+                    </motion.li>
+                  ))}
+                </ul>
+              ) : (
+                <p className="text-sm text-gray-500">No sections found</p>
+              )}
             </div>
           </motion.div>
         
@@ -248,19 +262,7 @@ const BlogPostLayout: React.FC<BlogPostLayoutProps> = ({ slug, children }) => {
               <div 
                 className="blog-content" 
                 dangerouslySetInnerHTML={{ 
-                  __html: post.content.replace(
-                    /<h2>(.*?)<\/h2>/g, 
-                    (_, title) => {
-                      const id = title.toLowerCase().replace(/[^a-z0-9]+/g, '-');
-                      return `<h2 id="${id}" class="text-3xl font-semibold mb-6 mt-12 text-gray-900 scroll-mt-32">${title}</h2>`;
-                    }
-                  ).replace(
-                    /<p>(.*?)<\/p>/g,
-                    '<p class="text-gray-800 mb-6 leading-8 text-justify text-base">$1</p>'
-                  ).replace(
-                    /<blockquote/g,
-                    '<blockquote class="border-l-4 border-[#FE6623] pl-4 italic text-xl text-gray-700 my-10"'
-                  )
+                  __html: post.content
                 }}
               />
             </div>
