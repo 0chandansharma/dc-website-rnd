@@ -1,5 +1,5 @@
 // src/components/blog/BlogPostLayout.tsx
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import Header from '@/components/common/Header';
@@ -15,12 +15,72 @@ interface BlogPostLayoutProps {
 const BlogPostLayout: React.FC<BlogPostLayoutProps> = ({ slug, children }) => {
   // Find the current post data
   const post = blogPosts.find(post => post.slug === slug);
+  const [tocItems, setTocItems] = useState<{id: string, text: string}[]>([]);
+  const [activeSection, setActiveSection] = useState('');
+  
+  useEffect(() => {
+    // Extract headings for table of contents when component mounts
+    if (post) {
+      const extractHeadings = () => {
+        const content = post.content;
+        const regex = /<h2 id="([^"]+)".*?>(.+?)<\/h2>/g;
+        const headings = [];
+        let match;
+        
+        while ((match = regex.exec(content)) !== null) {
+          headings.push({
+            id: match[1],
+            text: match[2].replace(/<[^>]*>/g, '') // Remove any HTML tags inside heading
+          });
+        }
+        
+        setTocItems(headings);
+      };
+      
+      extractHeadings();
+    }
+  }, [post]);
+  
+  useEffect(() => {
+    // Handle scroll to update active section
+    const handleScroll = () => {
+      if (tocItems.length === 0) return;
+      
+      const scrollPosition = window.scrollY + 200; // Offset for header
+      
+      // Find the section that is currently in view
+      for (const item of tocItems) {
+        const element = document.getElementById(item.id);
+        if (element) {
+          const { top, bottom } = element.getBoundingClientRect();
+          if (top <= 200 && bottom >= 0) {
+            setActiveSection(item.id);
+            break;
+          }
+        }
+      }
+    };
+    
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [tocItems]);
+  
+  // Function to scroll to section
+  const scrollToSection = (id: string) => {
+    const element = document.getElementById(id);
+    if (element) {
+      window.scrollTo({
+        top: element.offsetTop - 120,
+        behavior: 'smooth'
+      });
+    }
+  };
   
   if (!post) {
     return <div>Post not found</div>;
   }
   
-  // Find related posts (same category, excluding current post)
+  // Related posts (same category, excluding current post)
   const relatedPosts = blogPosts
     .filter(p => 
       p.slug !== slug && 
@@ -153,25 +213,57 @@ const BlogPostLayout: React.FC<BlogPostLayoutProps> = ({ slug, children }) => {
             <div className="p-4 bg-white/80 backdrop-blur-sm rounded-lg shadow-sm">
               <h3 className="text-[14px] font-medium text-[#525252] mb-4">Table of Contents:</h3>
               <ul className="space-y-3 text-[#525252]">
-                {/* This would be dynamically generated based on headers */}
-                <motion.li>
-                  <motion.a
-                    href="#section1"
-                    className="flex items-start gap-2 text-[12px] font-normal transition-all duration-300 text-gray-600 hover:text-primary"
-                    whileHover={{ x: 5 }}
-                  >
-                    <motion.span>•</motion.span>
-                    Introduction
-                  </motion.a>
-                </motion.li>
-                {/* Add more sections as needed */}
+                {tocItems.map((item) => (
+                  <motion.li key={item.id}>
+                    <motion.a
+                      href={`#${item.id}`}
+                      className={`flex items-start gap-2 text-[14px] font-normal transition-all duration-300 ${activeSection === item.id ? 'text-primary font-medium' : 'text-gray-600 hover:text-primary'}`}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        scrollToSection(item.id);
+                      }}
+                      whileHover={{ x: 5 }}
+                    >
+                      <motion.span
+                        animate={{ 
+                          scale: activeSection === item.id ? [1, 1.2, 1] : 1,
+                          color: activeSection === item.id ? "#FE6623" : "#525252"
+                        }}
+                        transition={{ duration: 0.3 }}
+                      >
+                        •
+                      </motion.span>
+                      {item.text}
+                    </motion.a>
+                  </motion.li>
+                ))}
               </ul>
             </div>
           </motion.div>
         
-          {/* Article Content */}
-          <article className="prose max-w-full mx-auto lg:space-y-2">
-            {children}
+          {/* Article Content - Add proper styling for blog content */}
+          <article className="prose max-w-full mx-auto lg:prose-lg">
+            <div className="blog-content">
+              {/* Use dangerouslySetInnerHTML to render the HTML content with proper styling */}
+              <div 
+                className="blog-content" 
+                dangerouslySetInnerHTML={{ 
+                  __html: post.content.replace(
+                    /<h2>(.*?)<\/h2>/g, 
+                    (_, title) => {
+                      const id = title.toLowerCase().replace(/[^a-z0-9]+/g, '-');
+                      return `<h2 id="${id}" class="text-3xl font-semibold mb-6 mt-12 text-gray-900 scroll-mt-32">${title}</h2>`;
+                    }
+                  ).replace(
+                    /<p>(.*?)<\/p>/g,
+                    '<p class="text-gray-800 mb-6 leading-8 text-justify text-base">$1</p>'
+                  ).replace(
+                    /<blockquote/g,
+                    '<blockquote class="border-l-4 border-[#FE6623] pl-4 italic text-xl text-gray-700 my-10"'
+                  )
+                }}
+              />
+            </div>
           </article>
         </div>
         
@@ -182,7 +274,7 @@ const BlogPostLayout: React.FC<BlogPostLayoutProps> = ({ slug, children }) => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          whileHover={{ backgroundColor: "#FE6623/5" }}
+          whileHover={{ backgroundColor: "rgba(254, 102, 35, 0.05)" }}
         >
           <img 
             src={post.author.avatar} 
