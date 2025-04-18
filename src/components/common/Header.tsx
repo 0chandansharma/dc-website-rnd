@@ -1,4 +1,4 @@
-// Fix for src/components/common/Header.tsx
+// src/components/common/Header.tsx
 "use client";
 import React, { useState, useEffect } from "react";
 import { Navbar } from "flowbite-react";
@@ -139,7 +139,7 @@ const Header = () => {
                     </motion.svg>
                   </Link>
                 
-                  {/* Dropdown Menu (Desktop) - FIXED POSITIONING */}
+                  {/* Dropdown Menu (Desktop) */}
                   <AnimatePresence>
                     {activeDropdown === index && (
                       <motion.div 
@@ -177,17 +177,17 @@ const Header = () => {
             ))}
             
             <div className="ml-6 flex items-center space-x-4">
-            <Button
-              text="Login"
-              variant="outline"
-              size="sm"
-              href="/login"
-              className="text-white border-white hover:bg-primary hover:border-primary px-10"
-            />
+              <Button
+                text="Login"
+                variant="outline"
+                size="sm"
+                href="/login"
+                className="text-white border-white hover:bg-primary hover:border-primary px-10"
+              />
             </div>
           </div>
           
-          {/* Mobile Menu Toggle - Fixed position so it's always accessible */}
+          {/* Mobile Menu Toggle */}
           <div className="xl:hidden ml-auto z-[100]">
             <button 
               onClick={handleMobileMenuToggle}
@@ -210,15 +210,15 @@ const Header = () => {
           <AnimatePresence>
             {isMobileMenuOpen && (
               <motion.div
-                className="xl:hidden fixed top-0 right-0 bottom-0 left-0 bg-black/90 z-50"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 0.3 }}
+              className="xl:hidden fixed inset-0 w-screen h-screen bg-black/90 z-[9999] overflow-hidden"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.3 }}
               >
-                {/* Close button - separate from toggle to ensure it's always visible */}
+                {/* Close button */}
                 <motion.button
-                  className="absolute top-6 right-6 text-white p-2 z-[101]"
+                  className="absolute top-6 right-6 text-white p-2 z-[10000]"
                   onClick={handleMobileMenuToggle}
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.9 }}
@@ -266,7 +266,7 @@ const Header = () => {
                         <AnimatePresence>
                           {activeDropdown === index && (
                             <motion.div 
-                              className="mt-2 pl-4 space-y-2"
+                              className="mt-2 pl-4 space-y-2 bg-white/10 rounded-lg p-3"
                               initial={{ opacity: 0, height: 0 }}
                               animate={{ opacity: 1, height: "auto" }}
                               exit={{ opacity: 0, height: 0 }}
@@ -281,7 +281,7 @@ const Header = () => {
                                 >
                                   <Link
                                     href={dropdownItem.path}
-                                    className="block py-2 text-sm text-gray-300 hover:text-primary"
+                                    className="block py-2 text-sm text-white hover:text-primary transition-colors"
                                     onClick={handleMobileMenuToggle}
                                   >
                                     {dropdownItem.name}
