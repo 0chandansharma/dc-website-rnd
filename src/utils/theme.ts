@@ -27,7 +27,8 @@ export const customTheme = {
       header: {
         base: "flex !bg-transparent lg:!px-[200px] items-start justify-start",
         close: {
-          base: " inline-flex items-center rounded-lg bg-transparent p-1.5 text-sm text-gray-400 hover:bg-gray-200 hover:text-gray-900 dark:hover:bg-gray-600 dark:hover:text-white",
+          // base: " inline-flex items-center rounded-lg bg-transparent p-1.5 text-sm text-gray-400 hover:bg-gray-200 hover:text-gray-900 dark:hover:bg-gray-600 dark:hover:text-white",
+          base: "hidden",
           icon: "h-5 w-5",
         },
       },

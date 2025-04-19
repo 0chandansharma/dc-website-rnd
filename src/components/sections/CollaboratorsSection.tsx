@@ -2,7 +2,10 @@ import React, { useState } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
 
-const CollaboratorsSection = () => {
+interface CollaboratorsSectionProps {
+  onBookDemo: () => void;
+}
+const CollaboratorsSection = ({ onBookDemo }: CollaboratorsSectionProps) => {
   const [hoveredIndex, setHoveredIndex] = useState(null);
 
   const collaborators = [
@@ -181,15 +184,15 @@ const CollaboratorsSection = () => {
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >
-                  <Link 
-                    href="/contact"
-                    className="inline-flex items-center bg-[#FE6623] text-white py-2 px-4 rounded-full hover:bg-[#FE6623E3] transition-colors duration-300"
-                  >
+                  <div
+                      onClick={onBookDemo} // Add this prop to the component
+                      className="inline-flex items-center bg-[#FE6623] text-white py-2 px-4 rounded-full hover:bg-[#FE6623E3] transition-colors duration-300 cursor-pointer"
+                    >
                     <span>Let's Talk</span>
                     <svg className="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
                     </svg>
-                  </Link>
+                  </div>
                 </motion.div>
               </motion.div>
               
@@ -253,11 +256,11 @@ const CollaboratorsSection = () => {
               transition={{ duration: 0.5 }}
               viewport={{ once: true }}
             >
-              <h3 className="text-2xl font-normal text-center mb-8">
+              {/* <h3 className="text-2xl font-normal text-center mb-8">
                 The Power of <span className="heading-orange">Collaboration</span>
-              </h3>
+              </h3> */}
               
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+              {/* <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                 {[
                   { number: "15+", label: "Global Partners" },
                   { number: "30+", label: "Joint Projects" },
@@ -288,7 +291,7 @@ const CollaboratorsSection = () => {
                     <div className="text-gray-600">{stat.label}</div>
                   </motion.div>
                 ))}
-              </div>
+              </div> */}
             </motion.div>
           </div>
         </motion.div>

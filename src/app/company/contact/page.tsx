@@ -28,17 +28,30 @@ const ContactPage = () => {
     setIsSubmitting(true);
     
     try {
-      // Simulate API call - replace with actual form submission
-      await new Promise(resolve => setTimeout(resolve, 1500));
-      setSubmitSuccess(true);
-      setFormState({
-        name: "",
-        email: "",
-        phone: "",
-        subject: "",
-        message: ""
+      const response = await fetch('/api/sendEmail', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          ...formState,
+          subject: 'New contact from website',
+        }),
       });
-    } catch (error) {
+      if (response.ok) {
+        setSubmitSuccess(true);
+        setFormState({
+          name: "",
+          email: "",
+          phone: "",
+          subject: "",
+          message: ""
+        }); 
+    } else {
+      console.error('response.ok is not working');
+    }
+  }
+  catch (error) {
       console.error('Error submitting form:', error);
     } finally {
       setIsSubmitting(false);

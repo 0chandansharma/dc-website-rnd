@@ -28,12 +28,12 @@ export default function Home() {
         
         <main>
           <HeroSection onBookDemo={() => setOpenModal(true)} />
-          <CollaboratorsSection />
+          <CollaboratorsSection onBookDemo={() => setOpenModal(true)} />
           <SpecializeSection onBookDemo={() => setOpenModal(true)} />
           <SolutionsSection />
           <EncryptionSection />
           <DrivingGrowthSection onBookDemo={() => setOpenModal(true)} />
-          <SmartNoteTabSection />
+          <SmartNoteTabSection onBookDemo={() => setOpenModal(true)} />
           <ChallengesSection />
           <ClientTestimonialsSection />
           <InsightsSection />

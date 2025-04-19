@@ -16,6 +16,7 @@ interface ButtonProps {
   loading?: boolean;
   fullWidth?: boolean;
   type?: "button" | "submit" | "reset";
+  target?: string;
 }
 
 const Button = ({ 
@@ -30,7 +31,8 @@ const Button = ({
   disabled = false,
   loading = false,
   fullWidth = false,
-  type = "button"
+  type = "button",
+  target
 }: ButtonProps) => {
   
   const getVariantClasses = () => {
@@ -97,7 +99,12 @@ const Button = ({
   
   if (href) {
     return (
-      <Link href={href} className={buttonClasses} tabIndex={disabled ? -1 : 0}>
+      <Link 
+        href={href} 
+        className={buttonClasses} 
+        tabIndex={disabled ? -1 : 0}
+        target={target} // Add this line
+      >
         {renderContent()}
       </Link>
     );

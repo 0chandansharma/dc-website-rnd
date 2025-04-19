@@ -15,7 +15,7 @@ const Header = () => {
   const navItems = [
     { 
       name: "Products", 
-      path: "/products",
+      path: "#",
       dropdown: [
         { name: "Docurate", path: "/products/docurate" },
         { name: "VisionTech", path: "/coming-soon/visiontech" },
@@ -26,7 +26,7 @@ const Header = () => {
     },
     { 
       name: "Solutions", 
-      path: "/solutions",
+      path: "#",
       dropdown: [
         { name: "Healthcare", path: "/coming-soon/healthcare" },
         { name: "Finance", path: "/coming-soon/finance" },
@@ -36,7 +36,7 @@ const Header = () => {
     },
     { 
       name: "Developers", 
-      path: "/developers",
+      path: "#",
       dropdown: [
         { name: "Documentation", path: "/coming-soon/docs" },
         { name: "API References", path: "/coming-soon/api" },
@@ -45,7 +45,7 @@ const Header = () => {
     },
     { 
       name: "Resources", 
-      path: "/resources",
+      path: "#",
       dropdown: [
         { name: "Blog", path: "/blog" },
         { name: "Case Studies", path: "/coming-soon/case-studies" },
@@ -54,7 +54,7 @@ const Header = () => {
     },
     { 
       name: "Company", 
-      path: "/company",
+      path: "#",
       dropdown: [
         { name: "About Us", path: "/company/about" },
         { name: "Careers", path: "/company/careers" },
@@ -183,6 +183,7 @@ const Header = () => {
                 size="sm"
                 href="/login"
                 className="text-white border-white hover:bg-primary hover:border-primary px-10"
+                target="_blank"
               />
             </div>
           </div>
@@ -305,6 +306,7 @@ const Header = () => {
                       href="/login"
                       className="text-white font-normal text-sm border border-[#fe6623] py-2 px-4 rounded-full hover:bg-[#fe6623] transition-all duration-300 inline-block"
                       onClick={handleMobileMenuToggle}
+                      target="_blank" 
                     >
                       Login
                     </Link>

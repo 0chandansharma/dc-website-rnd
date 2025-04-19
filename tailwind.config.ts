@@ -45,14 +45,14 @@ export default {
       fontSize: {
         'xs': 'clamp(10px, 1vw, 14px)',
         'sm': 'clamp(12px, 1.2vw, 16px)',
-        'base': 'clamp(14px, 1.5vw, 18px)',
-        'lg': 'clamp(16px, 2vw, 20px)',
+        'base': 'clamp(14px, 1.5vw, 17px)',
+        'lg': 'clamp(16px, 2vw, 18px)',
         'xl': 'clamp(18px, 2.5vw, 24px)',
         '2xl': 'clamp(20px, 3vw, 30px)',
         '3xl': 'clamp(24px, 3.5vw, 36px)',
         '4xl': 'clamp(30px, 4vw, 48px)',
         '5xl': 'clamp(36px, 5vw, 60px)',
-        '6xl': 'clamp(48px, 6vw, 72px)',
+        '6xl': 'clamp(48px, 6vw, 60px)',
       },
       spacing: {
         'xs': 'clamp(4px, 0.5vw, 8px)',

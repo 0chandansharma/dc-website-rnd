@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import { motion, useInView, useAnimation } from "framer-motion";
+import Link from "next/link";
 
 const SmartNoteTabSection = () => {
   const controls = useAnimation();
@@ -61,118 +62,108 @@ const SmartNoteTabSection = () => {
     }
   };
 
-  const floatingAnimation = {
-    y: [-10, 10, -10],
-    transition: {
-      duration: 5,
-      repeat: Infinity,
-      repeatType: "loop",
-      ease: "easeInOut"
-    }
-  };
-
   return (
     <section 
       ref={sectionRef}
-      className="smart-note-tab py-[88px] lg:py-[120px] relative min-h-screen flex items-center overflow-hidden bg-[url('https://dcmedvectorstore.blob.core.windows.net/website-videos/End-to-End.gif')] bg-no-repeat bg-cover bg-center"
+      className="py-20 lg:py-32 relative overflow-hidden bg-gradient-to-b from-[#111827] to-[#1F2937]"
     >
-      {/* Overlay with gradient */}
-      <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black/30 backdrop-filter backdrop-blur-[2px]"></div>
+      {/* Reduced quality background with optimized load */}
+      <div 
+        className="absolute inset-0 opacity-40"
+        style={{
+          backgroundImage: "url('https://dcmedvectorstore.blob.core.windows.net/website-videos/End-to-End.gif')",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
+          filter: "blur(2px)"
+        }}
+      />
       
-      <div className="container max-w-[90rem] mx-auto px-[10px] relative z-10">
+      {/* Overlay gradient */}
+      <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-transparent to-black/50"></div>
+      
+      <div className="container max-w-6xl mx-auto px-4 relative z-10">
         <motion.div 
           className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center"
           initial="hidden"
           animate={controls}
           variants={containerVariants}
         >
-          {/* Left content - Text */}
-          <div className="order-2 lg:order-1">
-            <motion.div className="text-center lg:text-left" variants={itemVariants}>
-              <motion.span 
-                className="inline-block bg-white/20 backdrop-blur-md rounded-[31px] py-[8px] px-[16px] text-[13px] text-white"
-                whileHover={{ scale: 1.05, backgroundColor: "rgba(255, 255, 255, 0.3)" }}
-              >
-                Upcoming
-              </motion.span>
-              
-              <motion.h2 
-                className="[font-size:_clamp(15px,2vw,56px)] [margin-top:_clamp(15px,2vw,36px)] [margin-bottom:_clamp(15px,2vw,28px)] text-white leading-[1.2] font-normal"
-                variants={itemVariants}
-              >
-                <span>Explore the</span>{" "}
-                <span className="heading-orange relative inline-block">
-                  Smart Note-Tab
-                  <motion.span 
-                    className="absolute -bottom-2 left-0 h-1 bg-[#FE6623] rounded-full"
-                    initial={{ width: 0 }}
-                    animate={{ width: "100%" }}
-                    transition={{ duration: 1, delay: 1 }}
-                  />
-                </span>
-              </motion.h2>
-              
-              <motion.p 
-                className="text-white/90 [font-size:_clamp(16px,2vw,28px)] leading-normal max-w-lg mx-auto lg:mx-0"
-                variants={itemVariants}
-              >
-                Capture, Transform, Simplify—Smart Notes Redefined.
-              </motion.p>
-              
-              {/* Features grid */}
-              <motion.div 
-                className="grid grid-cols-1 sm:grid-cols-2 gap-6 mt-12"
-                variants={containerVariants}
-              >
-                {features.map((feature, index) => (
-                  <motion.div 
-                    key={index}
-                    className="bg-white/10 backdrop-blur-md rounded-xl p-6 text-left border border-white/20 hover:bg-white/20 transition-all duration-300"
-                    variants={itemVariants}
-                    whileHover={{ y: -5, boxShadow: "0 15px 30px rgba(0, 0, 0, 0.2)" }}
-                  >
-                    <span className="text-3xl mb-4 block">{feature.icon}</span>
-                    <h3 className="text-white text-xl font-medium mb-2">{feature.title}</h3>
-                    <p className="text-white/80 text-sm">{feature.description}</p>
-                  </motion.div>
-                ))}
-              </motion.div>
-              
-              {/* CTA Button */}
-              <motion.div 
-                className="mt-12 flex justify-center lg:justify-start"
-                variants={itemVariants}
-              >
-                <motion.button
-                  className="relative overflow-hidden bg-[#FE6623] text-white py-3 px-8 rounded-full inline-flex items-center shadow-lg hover:shadow-xl"
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.98 }}
+          {/* Text Content */}
+          <motion.div variants={itemVariants} className="text-center lg:text-left">
+            <motion.span 
+              className="inline-block bg-white/10 backdrop-blur-sm rounded-full py-2 px-4 text-sm text-white mb-4"
+              whileHover={{ scale: 1.05, backgroundColor: "rgba(255, 255, 255, 0.2)" }}
+            >
+              Coming Soon
+            </motion.span>
+            
+            <motion.h2 
+              className="text-3xl md:text-4xl lg:text-5xl text-white font-normal mb-6"
+              variants={itemVariants}
+            >
+              Introducing <span className="heading-orange">Smart Note-Tab</span>
+            </motion.h2>
+            
+            <motion.p 
+              className="text-white/90 text-lg mb-10 max-w-lg mx-auto lg:mx-0"
+              variants={itemVariants}
+            >
+              Capture, transform, and simplify your note-taking experience with our AI-powered Smart Note-Tab. Designed for professionals who need seamless organization and intelligent insights.
+            </motion.p>
+            
+            {/* Features grid - simplified */}
+            <motion.div 
+              className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-10"
+              variants={containerVariants}
+            >
+              {features.map((feature, index) => (
+                <motion.div 
+                  key={index}
+                  className="bg-white/10 backdrop-blur-sm rounded-xl p-5 text-left border border-white/10 hover:border-white/30 transition-all duration-300"
+                  variants={itemVariants}
+                  whileHover={{ y: -5 }}
                 >
-                  <motion.span 
-                    className="absolute inset-0 bg-white/20"
-                    initial={{ x: "-100%" }}
-                    whileHover={{ x: "100%" }}
-                    transition={{ duration: 0.5 }}
-                  />
-                  <span className="mr-2 relative z-10">Join the Waitlist</span>
-                  <svg className="w-5 h-5 relative z-10" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                  </svg>
-                </motion.button>
-              </motion.div>
+                  <span className="text-2xl mb-3 block">{feature.icon}</span>
+                  <h3 className="text-white text-lg font-medium mb-2">{feature.title}</h3>
+                  <p className="text-white/70 text-sm">{feature.description}</p>
+                </motion.div>
+              ))}
             </motion.div>
-          </div>
+            
+            {/* CTA Button */}
+            <motion.div variants={itemVariants}>
+              <Link 
+                href="#"
+                className="inline-flex items-center bg-[#FE6623] text-white py-3 px-6 rounded-full hover:bg-[#FE6623]/90 transition-all shadow-lg"
+              >
+                <span className="mr-2">Join the Waitlist</span>
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                </svg>
+              </Link>
+            </motion.div>
+          </motion.div>
           
-          {/* Right content - Device mockup */}
+          {/* Abstract Visual Element - Replacing actual tablet mockup */}
           <motion.div 
-            className="order-1 lg:order-2 flex justify-center"
-            animate={floatingAnimation}
+            className="hidden lg:flex justify-center items-center"
             variants={itemVariants}
           >
-            <div className="relative">
-              {/* Decorative circles */}
+            <motion.div 
+              className="relative w-96 h-96"
+              animate={{ 
+                y: [0, -20, 0],
+                transition: { 
+                  duration: 4, 
+                  repeat: Infinity,
+                  repeatType: "reverse" 
+                }
+              }}
+            >
+              {/* Animated circles */}
               <motion.div
-                className="absolute -left-10 -top-10 w-32 h-32 rounded-full bg-[#FE6623]/20 blur-lg"
+                className="absolute top-10 left-10 w-40 h-40 rounded-full bg-[#FE6623]/20 blur-xl"
                 animate={{ 
                   scale: [1, 1.2, 1],
                   opacity: [0.3, 0.5, 0.3]
@@ -185,51 +176,120 @@ const SmartNoteTabSection = () => {
               />
               
               <motion.div
-                className="absolute -right-5 -bottom-5 w-24 h-24 rounded-full bg-blue-500/20 blur-lg"
+                className="absolute bottom-10 right-10 w-60 h-60 rounded-full bg-blue-500/20 blur-xl"
                 animate={{ 
-                  scale: [1, 1.2, 1],
-                  opacity: [0.3, 0.5, 0.3]
+                  scale: [1, 1.3, 1],
+                  opacity: [0.2, 0.4, 0.2]
                 }}
                 transition={{ 
-                  duration: 3,
+                  duration: 5,
                   repeat: Infinity,
                   repeatType: "reverse",
                   delay: 1
                 }}
               />
               
-              {/* Device mockup */}
+              {/* Abstract central element */}
               <motion.div 
-                className="relative bg-gray-900 rounded-3xl p-2 shadow-2xl border-4 border-gray-800 max-w-sm"
-                whileHover={{ rotateY: 10, rotateX: 5 }}
-                transition={{ type: "spring", stiffness: 100 }}
+                className="absolute inset-0 flex items-center justify-center"
+                whileHover={{ scale: 1.05 }}
               >
-                <div className="rounded-2xl overflow-hidden">
-                  <img 
-                    src="/image/smart-note-tab-preview.png" 
-                    alt="Smart Note-Tab Preview" 
-                    className="w-full"
-                    onError={(e) => {
-                      // Fallback for image error
-                      e.currentTarget.src = "https://via.placeholder.com/450x600/1a1a1a/FE6623?text=Smart+Note-Tab";
+                <svg width="300" height="300" viewBox="0 0 300 300">
+                  <motion.circle
+                    cx="150"
+                    cy="150"
+                    r="100"
+                    fill="transparent"
+                    stroke="#FE6623"
+                    strokeWidth="2"
+                    strokeDasharray="50 10"
+                    initial={{ rotate: 0 }}
+                    animate={{ rotate: 360 }}
+                    transition={{
+                      duration: 20,
+                      repeat: Infinity,
+                      ease: "linear"
                     }}
                   />
-                </div>
-                
-                {/* Device controls */}
-                <div className="absolute top-1/2 -right-3 transform -translate-y-1/2 space-y-2">
-                  <div className="w-1.5 h-10 bg-gray-800 rounded-r-lg"></div>
-                  <div className="w-1.5 h-10 bg-gray-800 rounded-r-lg"></div>
-                </div>
-                
-                {/* Home button/sensor */}
-                <div className="absolute bottom-3 left-1/2 transform -translate-x-1/2 w-16 h-1 bg-gray-700 rounded-full"></div>
+                  <motion.circle
+                    cx="150"
+                    cy="150"
+                    r="70"
+                    fill="transparent"
+                    stroke="#fff"
+                    strokeWidth="1"
+                    strokeDasharray="20 5"
+                    initial={{ rotate: 0 }}
+                    animate={{ rotate: -360 }}
+                    transition={{
+                      duration: 15,
+                      repeat: Infinity,
+                      ease: "linear"
+                    }}
+                  />
+                  <motion.path
+                    d="M150,60 L150,240 M60,150 L240,150"
+                    stroke="#FE6623"
+                    strokeWidth="3"
+                    strokeLinecap="round"
+                    initial={{ pathLength: 0, opacity: 0 }}
+                    animate={{ pathLength: 1, opacity: 1 }}
+                    transition={{ duration: 2, delay: 0.5 }}
+                  />
+                  <motion.circle
+                    cx="150"
+                    cy="150"
+                    r="30"
+                    fill="#FE6623"
+                    initial={{ scale: 0 }}
+                    animate={{ scale: 1 }}
+                    transition={{
+                      type: "spring",
+                      stiffness: 200,
+                      damping: 10,
+                      delay: 1
+                    }}
+                  />
+                </svg>
               </motion.div>
-            </div>
+            </motion.div>
           </motion.div>
         </motion.div>
         
-        {/* Stats section */}
+        {/* Stats section - Minimal alternative */}
+        <motion.div 
+          className="mt-20 grid grid-cols-2 md:grid-cols-4 gap-6"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7, delay: 0.5 }}
+        >
+          {[
+            { value: "60%", label: "Time Saved" },
+            { value: "85%", label: "User Satisfaction" },
+            { value: "3x", label: "Productivity Boost" },
+            { value: "24/7", label: "Access Anywhere" }
+          ].map((stat, index) => (
+            <motion.div 
+              key={index}
+              className="text-center"
+              whileHover={{ y: -5 }}
+            >
+              <motion.div 
+                className="text-3xl md:text-4xl font-bold text-[#FE6623]"
+                initial={{ scale: 0.8, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                transition={{ 
+                  delay: 0.7 + (index * 0.1), 
+                  duration: 0.5 
+                }}
+              >
+                {stat.value}
+              </motion.div>
+              <div className="text-white/70 mt-2">{stat.label}</div>
+            </motion.div>
+          ))}
+        </motion.div>
       </div>
     </section>
   );

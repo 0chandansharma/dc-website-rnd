@@ -182,7 +182,7 @@ const ReadyToUnlockSection = ({ onBookDemo }: ReadyToUnlockSectionProps) => {
                   viewport={{ once: true }}
                   transition={{ delay: 0.6 }}
                 >
-                  Join over 100+ businesses already using DeeCogs AI solutions
+                  Businesses are already using DeeCogs AI solutions
                 </motion.p>
                 
                 <motion.div 
@@ -221,7 +221,7 @@ const ReadyToUnlockSection = ({ onBookDemo }: ReadyToUnlockSectionProps) => {
               >
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
                   {[
-                    { value: "98%", label: "Client Satisfaction" },
+                    { value: "100%", label: "Client Satisfaction" },
                     { value: "40%", label: "Average ROI" },
                     { value: "3x", label: "Productivity Increase" },
                     { value: "60%", label: "Cost Reduction" }

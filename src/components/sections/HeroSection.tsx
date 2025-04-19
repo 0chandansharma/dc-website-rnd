@@ -35,6 +35,18 @@ const HeroSection = ({ onBookDemo }: HeroSectionProps) => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, [controls]);
   
+  // Smooth scroll function to solutions section
+  const scrollToSolutions = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    const solutionsSection = document.querySelector('.delivering-ai-solutions');
+    if (solutionsSection) {
+      solutionsSection.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start',
+      });
+    }
+  };
+  
   const settings = {
     dots: false,
     infinite: true,
@@ -147,8 +159,9 @@ const HeroSection = ({ onBookDemo }: HeroSectionProps) => {
               <div className="hidden md:block h-14 w-px bg-white/30 mx-2"></div>
               
               <motion.a 
-                href="#explore" 
-                className="text-white group flex items-center gap-2"
+                href="#explore"
+                onClick={scrollToSolutions} 
+                className="text-white group flex items-center gap-2 cursor-pointer"
                 whileHover={{ x: 5 }}
                 transition={{ type: "spring", stiffness: 300 }}
               >
