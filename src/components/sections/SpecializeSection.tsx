@@ -232,7 +232,7 @@ const SpecializeSection = ({ onBookDemo }: SpecializeSectionProps) => {
                     repeatType: "reverse"
                   }}
                 />
-                <motion.div
+                {/* <motion.div
                   className="w-64 h-64 md:w-96 md:h-96 rounded-full bg-[#FE6623]/10 backdrop-blur-sm border border-white/20 flex items-center justify-center text-center"
                   animate={{ 
                     rotate: 360
@@ -247,7 +247,7 @@ const SpecializeSection = ({ onBookDemo }: SpecializeSectionProps) => {
                     <h3 className="text-white text-xl md:text-3xl font-semibold">AI-Driven</h3>
                     <p className="text-white/80 text-sm md:text-base mt-2">Innovation</p>
                   </div>
-                </motion.div>
+                </motion.div> */}
               </div>
             </motion.div>
           </div>

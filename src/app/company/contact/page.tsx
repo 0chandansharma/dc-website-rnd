@@ -168,7 +168,7 @@ const ContactPage = () => {
                 
                 <div className="hidden lg:block">
                   <img 
-                    src="/image/contact-illustration.svg" 
+                    // src="/image/contact-illustration.svg" 
                     alt="Contact us illustration" 
                     className="max-w-full"
                     onError={(e) => {

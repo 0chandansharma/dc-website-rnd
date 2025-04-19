@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { motion, useAnimation } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
@@ -7,9 +7,12 @@ import Header from "@/components/common/Header";
 import Footer from "@/components/common/Footer";
 import { Flowbite } from "flowbite-react";
 import { customTheme } from "@/utils/theme";
+import ContactModal from "@/components/common/ContactModal";
 
 const DocuratePage = () => {
   const controls = useAnimation();
+  const [openModal, setOpenModal] = useState(false);
+  const capabilitiesSectionRef = useRef(null);
   
   useEffect(() => {
     controls.start({ 
@@ -21,6 +24,15 @@ const DocuratePage = () => {
       }
     });
   }, [controls]);
+
+  const scrollToCapabilities = () => {
+    if (capabilitiesSectionRef.current) {
+      capabilitiesSectionRef.current.scrollIntoView({ 
+        behavior: 'smooth',
+        block: 'start'
+      });
+    }
+  };
 
   const fadeIn = {
     hidden: { opacity: 0, y: 20 },
@@ -56,6 +68,7 @@ const DocuratePage = () => {
                     className="bg-[#FE6623] text-white py-3 px-8 rounded-full font-medium hover:bg-[#FE6623]/90 transition-all duration-300"
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
+                    onClick={() => setOpenModal(true)} 
                   >
                     Book a Demo
                   </motion.button>
@@ -63,8 +76,12 @@ const DocuratePage = () => {
                     className="border-2 border-[#FE6623] text-primary py-3 px-8 rounded-full font-medium hover:bg-[#FE6623]/10 transition-all duration-300"
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
+                    onClick={scrollToCapabilities}
                   >
                     Learn More
+                    <svg className="inline-block ml-2 w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                    </svg>
                   </motion.button>
                 </div>
               </motion.div>
@@ -88,7 +105,7 @@ const DocuratePage = () => {
         </section>
         
         {/* Features Section */}
-        <section className="py-20 bg-white">
+        <section ref={capabilitiesSectionRef} className="py-20 bg-white">
           <div className="container mx-auto px-4">
             <motion.div 
               className="text-center mb-16"
@@ -540,16 +557,19 @@ const DocuratePage = () => {
                   className="bg-[#FE6623] text-white py-3 px-8 rounded-full font-medium hover:bg-[#FE6623]/90 transition-all duration-300"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
+                  onClick={() => setOpenModal(true)}
                 >
                   Schedule a Demo
-                </motion.button>
-                <motion.button
-                  className="border-2 border-[#FE6623] text-primary py-3 px-8 rounded-full font-medium hover:bg-[#FE6623]/10 transition-all duration-300"
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  Contact Sales
-                </motion.button>
+                  </motion.button>
+                <Link href="/company/contact">
+                  <motion.button
+                    className="border-2 border-[#FE6623] text-primary py-3 px-8 rounded-full font-medium hover:bg-[#FE6623]/10 transition-all duration-300"
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    Contact Sales
+                  </motion.button>
+                </Link>
               </div>
             </motion.div>
           </div>
@@ -557,6 +577,7 @@ const DocuratePage = () => {
       </main>
       
       <Footer />
+      <ContactModal openModal={openModal} setOpenModal={setOpenModal} />
     </Flowbite>
   );
 };

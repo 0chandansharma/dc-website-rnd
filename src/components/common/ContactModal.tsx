@@ -1,4 +1,4 @@
-// src/components/common/ContactModal.tsx
+// Updated ContactModal.tsx with better error handling
 import React, { useState } from "react";
 import { Modal } from "flowbite-react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -26,6 +26,7 @@ const ContactModal = ({ openModal, setOpenModal }: ContactModalProps) => {
   
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
   
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -39,9 +40,11 @@ const ContactModal = ({ openModal, setOpenModal }: ContactModalProps) => {
   const handleBlur = (field: string) => {
     setFormFocus(prev => ({ ...prev, [field]: false }));
   };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
+    setSubmitError(null);
     
     try {
       const response = await fetch('/api/sendEmail', {
@@ -58,18 +61,23 @@ const ContactModal = ({ openModal, setOpenModal }: ContactModalProps) => {
         }),
       });
       
-      if (response.ok) {
-        setSubmitSuccess(true);
-        setFormState({ name: "", email: "", phone: "", message: "" });
-        
-        // Reset form after success
-        setTimeout(() => {
-          setSubmitSuccess(false);
-          setOpenModal(false);
-        }, 3000);
+      const data = await response.json();
+      
+      if (!response.ok) {
+        throw new Error(data.error || 'Failed to send message');
       }
+      
+      setSubmitSuccess(true);
+      setFormState({ name: "", email: "", phone: "", message: "" });
+      
+      // Reset form after success
+      setTimeout(() => {
+        setSubmitSuccess(false);
+        setOpenModal(false);
+      }, 3000);
     } catch (error) {
       console.error('Error submitting form:', error);
+      setSubmitError(error instanceof Error ? error.message : 'An unexpected error occurred');
     } finally {
       setIsSubmitting(false);
     }
@@ -216,6 +224,17 @@ const ContactModal = ({ openModal, setOpenModal }: ContactModalProps) => {
                     </span>
                     We are here to Assist you.
                   </motion.h3>
+
+                  {submitError && (
+                    <motion.div
+                      className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg mb-6"
+                      initial={{ opacity: 0, y: -10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.3 }}
+                    >
+                      <p>{submitError}</p>
+                    </motion.div>
+                  )}
 
                   <form className="mt-6" onSubmit={handleSubmit}>
                     <div className="grid grid-cols-1 gap-4">

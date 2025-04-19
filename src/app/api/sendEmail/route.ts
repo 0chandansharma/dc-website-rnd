@@ -1,12 +1,9 @@
+// src/app/api/sendEmail/route.ts
 import { NextResponse } from 'next/server';
 
 export async function POST(request: Request) {
   try {
-    // Debug environment variables
-    console.log('Service ID:', process.env.EMAILJS_SERVICE_ID);
-    console.log('Template ID:', process.env.EMAILJS_TEMPLATE_ID);
-    console.log('User ID:', process.env.EMAILJS_USER_ID);
-    
+    // Parse the request body
     const body = await request.json();
     const { name, email, phone, position, message, subject } = body;
     
@@ -43,8 +40,7 @@ export async function POST(request: Request) {
       }
     };
     
-    console.log('Sending data to EmailJS:', JSON.stringify(emailjsData));
-    
+    // Send the email through EmailJS
     const response = await fetch('https://api.emailjs.com/api/v1.0/email/send', {
       method: 'POST',
       headers: {
@@ -53,20 +49,21 @@ export async function POST(request: Request) {
       body: JSON.stringify(emailjsData),
     });
     
-    const responseText = await response.text();
-    console.log('EmailJS response:', response.status, responseText);
-    
-    if (response.ok) {
-      return NextResponse.json({ success: true });
-    } else {
-      console.error('EmailJS error response:', responseText);
+    if (!response.ok) {
+      const errorText = await response.text();
+      console.error('EmailJS error response:', response.status, errorText);
       return NextResponse.json(
-        { error: 'Failed to send email', details: responseText }, 
-        { status: 500 }
+        { error: 'Failed to send email', details: errorText }, 
+        { status: response.status }
       );
     }
+    
+    return NextResponse.json({ success: true });
   } catch (error) {
     console.error('Error in sendEmail API route:', error);
-    return NextResponse.json({ error: 'Internal Server Error', details: String(error) }, { status: 500 });
+    return NextResponse.json(
+      { error: 'Internal Server Error', details: String(error) }, 
+      { status: 500 }
+    );
   }
 }
