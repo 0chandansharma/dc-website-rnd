@@ -1,43 +1,58 @@
 // src/components/blog/BlogPostClient.tsx
 "use client";
 
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import BlogPostLayout from "@/components/blog/BlogPostLayout";
 import { Flowbite } from "flowbite-react";
 import { customTheme } from "@/utils/theme";
+import { blogPosts } from "@/data/blogData";
 
-// Client component for interactive elements
-useEffect(() => {
-  // Extract headings for table of contents when component mounts
-  if (post) {
-    const extractHeadings = () => {
-      // The issue is likely in this regex pattern
-      // Let's improve it to better match your HTML structure
-      const content = post.content;
-      const headings = [];
-      const regex = /<h2[^>]*>(.+?)<\/h2>/g;
-      let match;
-      
-      while ((match = regex.exec(content)) !== null) {
-        // Extract the text content from the heading
-        const text = match[1].replace(/<[^>]*>/g, '');
-        // Create an ID from the text (slug-friendly)
-        const id = text.toLowerCase().replace(/[^a-z0-9]+/g, '-');
+interface BlogPostClientProps {
+  post?: any;
+  slug: string;
+}
+
+const BlogPostClient: React.FC<BlogPostClientProps> = ({ post, slug }) => {
+  const [tocItems, setTocItems] = useState<{id: string, text: string}[]>([]);
+  const [currentPost, setCurrentPost] = useState(post);
+  
+  // If post isn't passed as a prop, find it from the slug
+  useEffect(() => {
+    if (!currentPost && slug) {
+      const foundPost = blogPosts.find(p => p.slug === slug);
+      setCurrentPost(foundPost);
+    }
+  }, [currentPost, slug]);
+
+  useEffect(() => {
+    // Extract headings for table of contents when component mounts
+    if (currentPost) {
+      const extractHeadings = () => {
+        const content = currentPost.content;
+        const headings = [];
+        // Find sections with IDs and h2 tags
+        const regex = /<section id="([^"]+)"[\s\S]*?<h2[^>]*>([\s\S]*?)<\/h2>/g;
+        let match;
         
-        headings.push({
-          id,
-          text
-        });
-      }
+        while ((match = regex.exec(content)) !== null) {
+          // Extract the ID and clean the text of any HTML tags
+          const id = match[1];
+          const text = match[2].replace(/<[^>]*>/g, '').trim();
+          
+          headings.push({
+            id,
+            text
+          });
+        }
+        
+        setTocItems(headings);
+      };
       
-      setTocItems(headings);
-    };
-    
-    extractHeadings();
-  }
-}, [post]);
+      extractHeadings();
+    }
+  }, [currentPost]);
 
-  if (!post) {
+  if (!currentPost) {
     return <div>Post not found</div>;
   }
 
