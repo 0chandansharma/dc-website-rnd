@@ -278,7 +278,7 @@ const SolutionsSection = () => {
   };
 
   return (
-    <section section id="solutions" className="delivering-ai-solutions relative [padding-top:_clamp(54px,4vw,192px)] [padding-bottom:_clamp(54px,4vw,160px)] bg-gradient-to-b from-white to-gray-50 overflow-hidden">
+    <section id="solutions" className="delivering-ai-solutions relative [padding-top:_clamp(54px,4vw,192px)] [padding-bottom:_clamp(54px,4vw,160px)] bg-gradient-to-b from-white to-gray-50 overflow-hidden">
       {/* Background decoration */}
       <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-[#FE6623]/5 rounded-full blur-[100px] -z-10"></div>
       <div className="absolute bottom-0 left-0 w-[300px] h-[300px] bg-blue-500/5 rounded-full blur-[80px] -z-10"></div>

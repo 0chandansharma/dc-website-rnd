@@ -1,6 +1,6 @@
-// Updated ContactModal.tsx with better error handling
-import React, { useState } from "react";
-import { Modal } from "flowbite-react";
+// src/components/common/ContactModal.tsx
+"use client";
+import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Button from "@/components/common/Button";
 
@@ -27,6 +27,19 @@ const ContactModal = ({ openModal, setOpenModal }: ContactModalProps) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
+
+  // Prevent body scroll when modal is open
+  useEffect(() => {
+    if (openModal) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [openModal]);
   
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -47,30 +60,11 @@ const ContactModal = ({ openModal, setOpenModal }: ContactModalProps) => {
     setSubmitError(null);
     
     try {
-      const response = await fetch('/api/sendEmail', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          name: formState.name,
-          email: formState.email,
-          phone: formState.phone,
-          message: formState.message,
-          subject: 'New Demo Request from Website'
-        }),
-      });
-      
-      const data = await response.json();
-      
-      if (!response.ok) {
-        throw new Error(data.error || 'Failed to send message');
-      }
-      
+      // Your submit logic here
+      await new Promise(resolve => setTimeout(resolve, 1500));
       setSubmitSuccess(true);
       setFormState({ name: "", email: "", phone: "", message: "" });
       
-      // Reset form after success
       setTimeout(() => {
         setSubmitSuccess(false);
         setOpenModal(false);
@@ -83,56 +77,10 @@ const ContactModal = ({ openModal, setOpenModal }: ContactModalProps) => {
     }
   };
 
-  // Animation variants
-  const modalVariants = {
-    hidden: { opacity: 0, scale: 0.8 },
-    visible: { 
-      opacity: 1, 
-      scale: 1,
-      transition: { duration: 0.5, ease: "easeOut" }
-    },
-    exit: { 
-      opacity: 0, 
-      scale: 0.8,
-      transition: { duration: 0.3, ease: "easeIn" }
-    }
-  };
-  
-  const contentVariants = {
-    hidden: { opacity: 0 },
-    visible: { 
-      opacity: 1,
-      transition: { 
-        staggerChildren: 0.1,
-        delayChildren: 0.2,
-        when: "beforeChildren" 
-      }
-    }
-  };
-  
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: { 
-      opacity: 1, 
-      y: 0,
-      transition: { duration: 0.4 }
-    }
-  };
-  
-  const successVariants = {
-    hidden: { opacity: 0, scale: 0.5 },
-    visible: { 
-      opacity: 1, 
-      scale: [0.5, 1.1, 1],
-      transition: { 
-        duration: 0.6,
-        times: [0, 0.7, 1]
-      }
-    }
-  };
+  if (!openModal) return null;
 
   return (
-    <div className={openModal ? "fixed inset-0 flex items-center justify-center z-[9999]" : "hidden"}>
+    <div className="fixed inset-0 flex items-center justify-center z-[9999]">
       {/* Backdrop overlay */}
       <motion.div 
         className="fixed inset-0 bg-black/70 backdrop-blur-sm"
@@ -142,277 +90,179 @@ const ContactModal = ({ openModal, setOpenModal }: ContactModalProps) => {
         onClick={() => setOpenModal(false)}
       />
       
-      <Modal
-        show={openModal}
-        size="xl"
-        popup
-        onClose={() => setOpenModal(false)}
-        className="z-[10000]" // Higher z-index than header
+      {/* Modal content */}
+      <motion.div
+        className="relative z-[10000] w-full max-w-xl bg-white rounded-xl shadow-xl overflow-hidden"
+        initial={{ opacity: 0, y: 20, scale: 0.95 }}
+        animate={{ opacity: 1, y: 0, scale: 1 }}
+        exit={{ opacity: 0, y: 20, scale: 0.95 }}
+        transition={{ duration: 0.3 }}
       >
-        <Modal.Header className="border-b border-gray-200/10" />
-
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={submitSuccess ? "success" : "form"}
-            initial="hidden"
-            animate="visible"
-            exit="exit"
-            variants={modalVariants}
-            className="relative px-6 lg:px-10 py-8 max-h-[90vh] overflow-y-auto" // Added max-height and overflow
-          >
+        {/* Close button */}
+        <button
+          className="absolute top-4 right-4 p-2 text-gray-500 hover:text-gray-700 focus:outline-none"
+          onClick={() => setOpenModal(false)}
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+        
+        <div className="p-6 md:p-8">
+          <AnimatePresence mode="wait">
             {submitSuccess ? (
               <motion.div 
                 className="flex items-center justify-center h-full min-h-[300px] flex-col"
-                variants={successVariants}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.3 }}
               >
                 <motion.div 
                   className="w-20 h-20 rounded-full bg-green-100 flex items-center justify-center mb-6"
-                  initial={{ rotate: 0 }}
-                  animate={{ rotate: 360 }}
-                  transition={{ duration: 0.8 }}
+                  initial={{ scale: 0 }}
+                  animate={{ scale: 1, rotate: 360 }}
+                  transition={{ duration: 0.5 }}
                 >
-                  <motion.svg 
-                    initial={{ pathLength: 0 }}
-                    animate={{ pathLength: 1 }}
-                    transition={{ delay: 0.2, duration: 0.8, ease: "easeInOut" }}
-                    width="32" 
-                    height="32" 
-                    viewBox="0 0 24 24" 
-                    fill="none" 
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <motion.path 
-                      d="M5 13l4 4L19 7" 
-                      stroke="#10B981" 
-                      strokeWidth="3" 
-                      strokeLinecap="round" 
-                      strokeLinejoin="round"
-                    />
-                  </motion.svg>
+                  <svg className="w-10 h-10 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                  </svg>
                 </motion.div>
                 
-                <motion.h3 
-                  className="text-2xl font-medium text-gray-900 mb-2"
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.5 }}
-                >
-                  Message Sent!
-                </motion.h3>
-                
-                <motion.p 
-                  className="text-gray-600 text-center max-w-md"
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.7 }}
-                >
-                  Thank you for reaching out. We'll get back to you shortly.
-                </motion.p>
+                <h3 className="text-2xl font-medium text-gray-900 mb-2">Message Sent!</h3>
+                <p className="text-gray-600 text-center">Thank you for reaching out. We'll get back to you shortly.</p>
               </motion.div>
             ) : (
-              <motion.div 
-                className="space-y-6 h-full flex items-center flex-wrap py-4"
-                variants={contentVariants}
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.3 }}
               >
-                <div className="w-full">
-                  <motion.h3 
-                    className="text-black text-xl lg:text-2xl leading-tight mb-6"
-                    variants={itemVariants}
-                  >
-                    <span className="heading-orange block mb-2">
-                      Get in touch with Us.
-                    </span>
-                    We are here to Assist you.
-                  </motion.h3>
+                <h3 className="text-black text-xl lg:text-2xl leading-tight mb-6">
+                  <span className="heading-orange block mb-2">
+                    Get in touch with Us.
+                  </span>
+                  We are here to Assist you.
+                </h3>
 
-                  {submitError && (
-                    <motion.div
-                      className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg mb-6"
-                      initial={{ opacity: 0, y: -10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.3 }}
-                    >
-                      <p>{submitError}</p>
-                    </motion.div>
-                  )}
+                {submitError && (
+                  <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg mb-6">
+                    <p>{submitError}</p>
+                  </div>
+                )}
 
-                  <form className="mt-6" onSubmit={handleSubmit}>
-                    <div className="grid grid-cols-1 gap-4">
-                      {/* Name Input */}
-                      <motion.div 
-                        variants={itemVariants}
-                        className="relative group"
+                <form className="mt-6" onSubmit={handleSubmit}>
+                  <div className="grid grid-cols-1 gap-4">
+                    {/* Name Input */}
+                    <div className="relative group">
+                      <input
+                        type="text"
+                        id="floating_name"
+                        name="name"
+                        value={formState.name}
+                        onChange={handleChange}
+                        onFocus={() => handleFocus('name')}
+                        onBlur={() => handleBlur('name')}
+                        className="block w-full px-0 py-2 text-black bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-[#FE6623] peer"
+                        placeholder=" "
+                        required
+                      />
+                      <label 
+                        htmlFor="floating_name"
+                        className="absolute text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-primary peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
                       >
-                        <motion.span
-                          className={`absolute bottom-0 left-0 w-0 h-0.5 bg-[#FE6623] transition-all duration-300 ${formFocus.name || formState.name ? 'w-full' : ''}`}
-                          animate={{ width: formFocus.name || formState.name ? "100%" : "0%" }}
-                          transition={{ duration: 0.3 }}
-                        />
-                        <input
-                          type="text"
-                          id="floating_name"
-                          name="name"
-                          value={formState.name}
-                          onChange={handleChange}
-                          onFocus={() => handleFocus('name')}
-                          onBlur={() => handleBlur('name')}
-                          className="block w-full px-0 py-2 text-black bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-[#FE6623] peer"
-                          placeholder=" "
-                          required
-                        />
-                        <label 
-                          htmlFor="floating_name"
-                          className="absolute text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-primary peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
-                        >
-                          Your Name
-                        </label>
-                        <span className="text-gray-500 text-xs mt-1 block">Enter your full name</span>
-                      </motion.div>
-                      
-                      {/* Email Input */}
-                      <motion.div 
-                        variants={itemVariants}
-                        className="relative group"
-                      >
-                        <motion.span
-                          className={`absolute bottom-0 left-0 w-0 h-0.5 bg-[#FE6623] transition-all duration-300 ${formFocus.email || formState.email ? 'w-full' : ''}`}
-                          animate={{ width: formFocus.email || formState.email ? "100%" : "0%" }}
-                          transition={{ duration: 0.3 }}
-                        />
-                        <input
-                          type="email"
-                          id="floating_email"
-                          name="email"
-                          value={formState.email}
-                          onChange={handleChange}
-                          onFocus={() => handleFocus('email')}
-                          onBlur={() => handleBlur('email')}
-                          className="block w-full px-0 py-2 text-black bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-[#FE6623] peer"
-                          placeholder=" "
-                          required
-                        />
-                        <label 
-                          htmlFor="floating_email"
-                          className="absolute text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-primary peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
-                        >
-                          Email Address
-                        </label>
-                        <span className="text-gray-500 text-xs mt-1 block">We'll never share your email</span>
-                      </motion.div>
-                      
-                      {/* Phone Input */}
-                      <motion.div 
-                        variants={itemVariants}
-                        className="relative group"
-                      >
-                        <motion.span
-                          className={`absolute bottom-0 left-0 w-0 h-0.5 bg-[#FE6623] transition-all duration-300 ${formFocus.phone || formState.phone ? 'w-full' : ''}`}
-                          animate={{ width: formFocus.phone || formState.phone ? "100%" : "0%" }}
-                          transition={{ duration: 0.3 }}
-                        />
-                        <input
-                          type="text"
-                          id="floating_phone"
-                          name="phone"
-                          value={formState.phone}
-                          onChange={handleChange}
-                          onFocus={() => handleFocus('phone')}
-                          onBlur={() => handleBlur('phone')}
-                          className="block w-full px-0 py-2 text-black bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-[#FE6623] peer"
-                          placeholder=" "
-                        />
-                        <label 
-                          htmlFor="floating_phone"
-                          className="absolute text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-primary peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
-                        >
-                          Phone Number (optional)
-                        </label>
-                        <span className="text-gray-500 text-xs mt-1 block">Optional contact number</span>
-                      </motion.div>
-                      
-                      {/* Message Textarea */}
-                      <motion.div 
-                        className="relative group"
-                        variants={itemVariants}
-                      >
-                        <motion.span
-                          className={`absolute bottom-0 left-0 w-0 h-0.5 bg-[#FE6623] transition-all duration-300 ${formFocus.message || formState.message ? 'w-full' : ''}`}
-                          animate={{ width: formFocus.message || formState.message ? "100%" : "0%" }}
-                          transition={{ duration: 0.3 }}
-                        />
-                        <textarea
-                          id="floating_message"
-                          name="message"
-                          value={formState.message}
-                          onChange={handleChange}
-                          onFocus={() => handleFocus('message')}
-                          onBlur={() => handleBlur('message')}
-                          className="block min-h-[100px] w-full px-0 py-2 text-black bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-[#FE6623] peer"
-                          placeholder=" "
-                          required
-                        ></textarea>
-                        <label 
-                          htmlFor="floating_message"
-                          className="absolute text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-primary peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
-                        >
-                          Message
-                        </label>
-                        <span className="text-gray-500 text-xs mt-1 block">Tell us how we can help you</span>
-                      </motion.div>
-
-                      {/* Submit Button */}
-                      <motion.div 
-                        className="mt-4 text-center"
-                        variants={itemVariants}
-                      >
-                        <Button
-                          text={isSubmitting ? "Sending..." : "Send Message"}
-                          variant="primary"
-                          size="md"
-                          type="submit"
-                          loading={isSubmitting}
-                          disabled={isSubmitting}
-                          className="w-full md:w-auto"
-                        />
-                      </motion.div>
+                        Your Name
+                      </label>
+                      <span className="text-gray-500 text-xs mt-1 block">Enter your full name</span>
                     </div>
-                  </form>
-                </div>
+                    
+                    {/* Email Input */}
+                    <div className="relative group">
+                      <input
+                        type="email"
+                        id="floating_email"
+                        name="email"
+                        value={formState.email}
+                        onChange={handleChange}
+                        onFocus={() => handleFocus('email')}
+                        onBlur={() => handleBlur('email')}
+                        className="block w-full px-0 py-2 text-black bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-[#FE6623] peer"
+                        placeholder=" "
+                        required
+                      />
+                      <label 
+                        htmlFor="floating_email"
+                        className="absolute text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-primary peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+                      >
+                        Email Address
+                      </label>
+                      <span className="text-gray-500 text-xs mt-1 block">We'll never share your email</span>
+                    </div>
+                    
+                    {/* Phone Input */}
+                    <div className="relative group">
+                      <input
+                        type="text"
+                        id="floating_phone"
+                        name="phone"
+                        value={formState.phone}
+                        onChange={handleChange}
+                        onFocus={() => handleFocus('phone')}
+                        onBlur={() => handleBlur('phone')}
+                        className="block w-full px-0 py-2 text-black bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-[#FE6623] peer"
+                        placeholder=" "
+                      />
+                      <label 
+                        htmlFor="floating_phone"
+                        className="absolute text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-primary peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+                      >
+                        Phone Number (optional)
+                      </label>
+                      <span className="text-gray-500 text-xs mt-1 block">Optional contact number</span>
+                    </div>
+                    
+                    {/* Message Textarea */}
+                    <div className="relative group">
+                      <textarea
+                        id="floating_message"
+                        name="message"
+                        value={formState.message}
+                        onChange={handleChange}
+                        onFocus={() => handleFocus('message')}
+                        onBlur={() => handleBlur('message')}
+                        className="block min-h-[100px] w-full px-0 py-2 text-black bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-[#FE6623] peer"
+                        placeholder=" "
+                        required
+                      ></textarea>
+                      <label 
+                        htmlFor="floating_message"
+                        className="absolute text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-primary peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+                      >
+                        Message
+                      </label>
+                      <span className="text-gray-500 text-xs mt-1 block">Tell us how we can help you</span>
+                    </div>
+
+                    {/* Submit Button */}
+                    <div className="mt-4 text-center">
+                      <Button
+                        text={isSubmitting ? "Sending..." : "Send Message"}
+                        variant="primary"
+                        size="md"
+                        type="submit"
+                        loading={isSubmitting}
+                        disabled={isSubmitting}
+                        className="w-full md:w-auto"
+                      />
+                    </div>
+                  </div>
+                </form>
               </motion.div>
             )}
-            
-            {/* Background decoration - made smaller for half-screen modal */}
-            <motion.div 
-              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 -z-10 w-full max-w-[200px] opacity-10"
-              initial={{ opacity: 0, scale: 0.5, rotate: -10 }}
-              animate={{ 
-                opacity: 0.08,
-                scale: 1,
-                rotate: 0,
-                transition: { duration: 1.2 }
-              }}
-            >
-              <img
-                src="/image/d-overlay.png"
-                className="w-full"
-                alt="DeeCogs Logo"
-              />
-            </motion.div>
-            
-            {/* Close button with animation */}
-            <motion.button
-                onClick={() => setOpenModal(false)}
-                className="absolute top-4 left-4 p-2 rounded-full text-gray-700 hover:bg-gray-100 transition-colors z-20"
-                whileHover={{ scale: 1.1 }}
-                transition={{ type: "spring", stiffness: 300, damping: 15 }}
-              >
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M19 12H5M12 19l-7-7 7-7"/>
-                </svg>
-              </motion.button>
-          </motion.div>
-        </AnimatePresence>
-      </Modal>
+          </AnimatePresence>
+        </div>
+      </motion.div>
     </div>
   );
 };

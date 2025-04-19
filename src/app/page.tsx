@@ -14,9 +14,14 @@ import ChallengesSection from "@/components/sections/ChallengesSection";
 import ClientTestimonialsSection from "@/components/sections/ClientTestimonialsSection";
 import InsightsSection from "@/components/sections/InsightsSection";
 import ReadyToUnlockSection from "@/components/sections/ReadyToUnlockSection";
-import ContactModal from "@/components/common/ContactModal";
+// import ContactModal from "@/components/common/ContactModal";
 import Footer from "@/components/common/Footer";
 import { customTheme } from "@/utils/theme";
+import dynamic from 'next/dynamic';
+const ClientOnlyModal = dynamic(
+  () => import("@/components/common/ClientOnlyModal"),
+  { ssr: false }
+);
 
 export default function Home() {
   const [openModal, setOpenModal] = useState(false);
@@ -41,7 +46,9 @@ export default function Home() {
         </main>
         
         <Footer />
-        <ContactModal openModal={openModal} setOpenModal={setOpenModal} />
+        {/* <ContactModal openModal={openModal} setOpenModal={setOpenModal} />
+         */}
+         <ClientOnlyModal openModal={openModal} setOpenModal={setOpenModal} />
       </Flowbite>
     </>
   );
