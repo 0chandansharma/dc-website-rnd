@@ -1,6 +1,7 @@
 import React from "react";
 import Link from "next/link";
 
+// adding just to test
 const Footer = () => {
   return (
     <footer className="bg-[url('/image/footer.jpg')] [padding-top:_clamp(88px,4vw,255px)] relative bg-cover bg-center bg-no-repeat">
