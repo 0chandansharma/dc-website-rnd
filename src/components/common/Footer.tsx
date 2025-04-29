@@ -76,7 +76,7 @@ const Footer = () => {
       title: "Solutions",
       links: [
         { text: "Canse", href: "#" },
-        { text: "Therai (Cancer Prognostic Tool)", href: "#" },
+        { text: "Therai (Cancer Prognostic Tool)" , href: "#" },
         { text: "Excerli (Workout Platform)", href: "#" }
       ]
     }
@@ -303,7 +303,7 @@ const Footer = () => {
                     type="email"
                     name="email"
                     id="floating_email"
-                    className="block arrow-bg-input pe-[35px] bg-no-repeat py-3 px-0 w-full text-[#000] bg-transparent border-0 border-b-2 border-p[#000000bf] appearance-none focus:outline-none focus:ring-0 placeholder:font-light placeholder:text-[#000000bf] text-[20px] focus:border-[#FE6623E3] peer"
+                    className="block  pe-[35px] bg-no-repeat py-3 px-0 w-full text-[#000] bg-transparent border-0 border-b-2 border-p[#000000bf] appearance-none focus:outline-none focus:ring-0 placeholder:font-light placeholder:text-[#000000bf] text-[20px] focus:border-[#FE6623E3] peer"
                     placeholder="Enter your email address.."
                     required
                     whileFocus={{ 
@@ -360,7 +360,7 @@ const Footer = () => {
             className="text-[#292C33] block mb-[32px] text-[14px]"
             whileHover={{ color: "#FE6623" }}
           >
-            @2024 DeeCogs
+            @2025 DeeCogs
           </motion.span>
           <ul className="flex justify-center">
             {["Legal", "Privacy", "Trust"].map((item, index) => (

@@ -268,7 +268,7 @@ const Footer = () => {
                       className="text-[#707070] [font-size:_clamp(10px,2vw,20px)]"
                     >
                       Therai{" "}
-                      <span className="text-[14px]">
+                      <span className="text-[16px]">
                         (Cancer Prognostic Tool)
                       </span>
                     </Link>
@@ -302,7 +302,7 @@ const Footer = () => {
                     type="email"
                     name="floating_email"
                     id="floating_email"
-                    className="block arrow-bg-input pe-[35px] bg-no-repeat py-2.5 px-0 w-full text-[#000] bg-transparent border-0 border-b-2 border-p[#000000bf] appearance-none focus:outline-none focus:ring-0 placeholder:font-light placeholder:text-[#000000bf] text-[20px] focus:border-[#FE6623E3] peer"
+                    className=" bg-no-repeat py-2.5 px-0 w-full text-[#000] bg-transparent border-0 border-b-2 border-p[#000000bf] appearance-none focus:outline-none focus:ring-0 placeholder:font-light placeholder:text-[#000000bf] text-[20px] focus:border-[#FE6623E3] peer"
                     placeholder="Enter your email address.."
                     required
                   />
@@ -316,7 +316,7 @@ const Footer = () => {
         </div>
         <div className="text-center py-[15px] lg:py-[32px]">
           <span className="text-[#292C33] block mb-[32px] text-[14px]">
-            @2024 DeeCogs
+            @2025 DeeCogs
           </span>
           <ul className="flex justify-center">
             <li className="px-[32px]">
