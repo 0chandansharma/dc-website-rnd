@@ -1,7 +1,7 @@
 import React from "react";
 import Link from "next/link";
 
-const ComingSoonSection = () => {
+const  ComingSoonSection = () => {
   return (
     <section className="bg-[url('https://dcmedvectorstore.blob.core.windows.net/website-videos/coming-soon.gif')] overflow-auto py-[10px] md:py-[59px] px-[10px] md:px-[92px] bg-center bg-cover bg-no-repeat h-screen">
       <div className="container px-[10px] h-full mx-auto">
